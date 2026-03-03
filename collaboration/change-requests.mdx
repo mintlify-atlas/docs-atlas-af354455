@@ -1,0 +1,133 @@
+---
+title: Change requests
+description: Collaborate on content edits through change requests
+icon: code-branch
+---
+
+A change request is a copy of your main content. It comes from the concept of **branching**, and will feel familiar to anyone who uses pull requests in GitHub or merge requests in GitLab.
+
+In a change request, you can edit, update and delete elements of your content, request reviews on your changes, then merge them back into your main version to apply all the changes you made.
+
+## Why branched content?
+
+Branches are used heavily in software development, giving contributors ways to keep main code branches protected, with abstracted branches used for proposing or implementing specific changes.
+
+GitBook brings this approach to content and documentation — allowing for content to be branched as many times as required, protecting the main branch of content from changes, giving a clear version history, and allowing for review-focused dynamics around **what** changes make their way into the main branch of content and **why** they're being proposed.
+
+## Working with change requests
+
+<Steps>
+  <Step title="Open a change request">
+    When a space is locked for live editing, the main branch of content is read-only. To start editing, create a change request by:
+    
+    - Pressing the **Edit** button in the top right corner when viewing a space
+    - Implementing a new change request with GitBook Agent
+    - Automatically by GitBook Agent
+  </Step>
+  
+  <Step title="Make your changes">
+    After a change request is opened, you're free to make any edits or changes. Your changes are synced automatically, and you can collaborate with real-time collaboration.
+    
+    Changes can be made by working directly in the editor or by working with Docs Agent.
+  </Step>
+  
+  <Step title="Request a review">
+    Once your changes are ready, request a review from your team in the **Overview** tab. Tagging reviewers will notify them and allow you to collaborate further by making more changes in the editor or discussing changes in comments.
+    
+    You can request reviews from Docs Agent or anyone on your team with the right permissions.
+  </Step>
+  
+  <Step title="Merge">
+    After your reviews are complete, merge your changes to publish them to your live docs site immediately!
+  </Step>
+</Steps>
+
+<Note>
+While in a change request, your experience is familiar — your changes sync automatically, you can collaborate in real-time, and you have the same editor experience. The main difference is that **this is a branch of the main content**.
+</Note>
+
+## Creating a change request
+
+Inside a space where live edits are disabled, click the **Edit** button in the space header to start a new change request.
+
+This will open a new change request where you can edit or delete content as needed. Your changes are saved automatically, and other people can join you to collaborate in real-time.
+
+When creating a change request, you can add a title and description to provide more context about the changes you're making.
+
+### Creating with GitBook Agent
+
+GitBook Agent is an AI teammate that can plan and implement change requests based on any instructions you give it.
+
+To open a new change request with GitBook Agent, click the GitBook Agent icon in the upper right corner next to the Edit button, and ask GitBook to implement any changes you want.
+
+Some things you can ask it to do include:
+
+- Add usage examples
+- Improve page SEO
+- Enhance clarity
+- Check for consistency
+- Fix typos and spelling errors
+- Link related content
+
+## Previewing a change request
+
+You can preview the changes you've made by clicking the **Preview** option in the space header. This will switch to a preview of your published docs with the proposed changes included.
+
+Below the Preview button is a URL for your site preview. Click this and your site preview will open in full in a new tab with the Preview toolbar at the bottom.
+
+<Info>
+You can only preview change requests for spaces added to a published docs site.
+</Info>
+
+## Reviewing a change request
+
+It's up to you and your team how you want to handle reviews — GitBook is not opinionated or forceful in this regard. Some teams have a very loose review process, others have strict procedures using advanced permission roles.
+
+Most reviews will take place in the change request's comments, where collaborators can share feedback and discussions against specific content blocks or against the change request as a whole.
+
+### Diff view
+
+You can toggle diff mode on or off for any change request. This gives you an in-context comparison of the primary content and the changes made in the change request.
+
+When you open the **Changes** tab in the space header, the diff view will appear. It highlights every page and block that's been edited in a change request.
+
+There are two options when using diff view:
+
+1. **Show all pages** — Shows both modified and non-modified pages in the table of contents. Good for seeing which pages have been edited in context.
+2. **Show only changed pages** — Shows only modified pages in the table of contents, helping you focus on changed content. Particularly helpful in larger spaces.
+
+<Note>
+Members with an **editor** role can create and submit requests, but only members with **reviewer** or above roles can merge change requests. When setting your permissions, keep in mind the type of edit and review dynamic you want to achieve!
+</Note>
+
+## Merging a change request
+
+Once a change request has been reviewed, it's time to merge! Merging will put the change request's changes into the main branch of content, creating an updated main branch and a new item in the space's version history.
+
+You might not be able to merge a change request if you don't have the right permissions, or if your change request hasn't passed your organization or space's merge rules.
+
+### Resolving merge conflicts
+
+Sometimes when you want to merge a change request, there will be conflicts between your primary content and the content you're trying to merge. In the simplest form, a conflict is a piece of content that could not be merged automatically.
+
+You'll be presented with a conflict alert and a list of conflicts you'll need to resolve before continuing the merge.
+
+You have two options for resolving merge conflicts:
+
+#### Selecting a version to merge
+
+You can resolve a merge conflict by selecting which version you want to merge — either your incoming content, or the content that was previously there. This is essentially a binary choice: keep your recent work, or keep the original content.
+
+Select the version you want to keep, and the other version will be deleted.
+
+#### Manually editing
+
+To resolve a merge conflict by manually editing, go ahead and edit the content directly. You can delete the blocks you don't need, or even rewrite them entirely. Once you're happy with the changes, you can move on to the next conflict.
+
+## Archiving a change request
+
+If you decide not to merge a change request and want to remove it from the review queue, you can archive it.
+
+To archive a change request, open it up, then click the Actions menu next to the change request's title and choose **Archive**. Once you confirm, the change request will no longer be listed as active.
+
+You can find and reopen archived change requests later by opening the Change Requests menu and selecting the **Archived** tab.

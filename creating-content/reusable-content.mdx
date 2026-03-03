@@ -1,0 +1,155 @@
+---
+title: Reusable content
+description: Create reusable blocks that sync across multiple pages and spaces
+---
+
+<Note>
+Reusable content is available on Pro and Enterprise plans.
+</Note>
+
+Reusable content lets you sync content across multiple pages and spaces. Edit one instance and all instances update automatically—perfect for disclaimers, warnings, common procedures, or any content that appears in multiple places.
+
+## How it works
+
+Reusable content works just like any other content—you can modify it via change requests, include it in review workflows, and it renders correctly on published sites.
+
+While reusable content can be referenced across multiple spaces, it belongs to a single parent space where all edits must originate.
+
+## The parent space concept
+
+The **parent space** owns the reusable content. Only this space can edit it.
+
+Even though updates appear instantly in all instances, all changes must originate from the parent space—either as a direct edit or through a change request.
+
+This ensures that editing rights are respected, even when content is reused across your organization. GitBook enforces permission-based editing, so reusable content can only be changed from its parent space.
+
+## Create reusable content
+
+To create reusable content:
+
+1. Select one or more blocks on your page
+2. Open the **Actions menu**
+3. Select **Turn into** > **Reusable content**
+4. Give your block a descriptive name
+5. Click **Create**
+
+**Alternative method:**
+Select blocks and press **Cmd + C** to see a prompt asking if you want to create reusable content.
+
+<Info>
+Choose clear, descriptive names to make reusable content easy to find and insert later.
+</Info>
+
+## Insert reusable content
+
+Insert reusable content like any other block:
+
+1. Press `/` on an empty line to open the insert palette
+2. Search for your content by name or type "reusable"
+3. Select the content to insert
+
+**Alternative method:**
+Click the `+` button to the left of any block or empty line.
+
+You can also find reusable content in the pages sidebar, which shows a list of previously created content blocks in your current space.
+
+## Edit reusable content
+
+Edit reusable content like any other content:
+
+- **With live edits enabled:** Edit any instance directly
+- **Without live edits:** Create or edit within a change request
+
+Any changes you make sync everywhere the content is used.
+
+<Note>
+If you're editing inside a change request, content syncs to all instances once the change request is merged.
+</Note>
+
+## Detach reusable content
+
+Detach reusable content to convert it back to regular blocks:
+
+1. Open the **Actions menu** on the reusable content
+2. Select **Detach**
+
+Once detached:
+- Changes to the detached block won't affect other instances
+- Changes to other instances won't affect the detached block
+- All other instances remain synced together
+
+## Delete reusable content
+
+To delete reusable content entirely:
+
+1. Find the reusable content in the page's table of contents
+2. Open the **Actions menu**
+3. Select **Delete**
+
+<Warning>
+Deleting reusable content removes it from **all pages where it's used**. This action cannot be undone.
+</Warning>
+
+## Known limitations
+
+### Integrations
+
+Blocks provided by integrations are not supported in reusable content. This is because integrations are installed per space, and limiting access ensures third-party integrations only have the permissions you grant.
+
+Referencing reusable content across spaces would break this security boundary.
+
+### Search
+
+Currently, reusable content only appears in search results within its parent space. GitBook is working to remove this limitation so reusable content shows up in search results wherever it's referenced.
+
+## Syncing with GitHub and GitLab
+
+Reusable content is fully supported with Git Sync. Your reusable content exports to a dedicated `includes` folder, with each piece as a separate Markdown file.
+
+Reference your content in other pages using the `includes` directive:
+
+```markdown
+{% include "../../.gitbook/includes/reusable-block.md" %}
+```
+
+<Info>
+When syncing, the `.gitbook/includes` directory is created in the root of each synced space (which may not be the repository root).
+</Info>
+
+<Note>
+If writing on the GitHub side, ensure the include path is relative to the file containing the reference (not the repository root).
+</Note>
+
+## Best practices
+
+<CardGroup cols={2}>
+  <Card title="Use for repeated content" icon="repeat">
+    Perfect for disclaimers, warnings, procedures, or legal text that appears in multiple places
+  </Card>
+  <Card title="Name clearly" icon="tag">
+    Use descriptive names like "api-deprecation-warning" instead of "warning-1"
+  </Card>
+  <Card title="Keep it focused" icon="crosshairs">
+    Create small, focused reusable blocks rather than large sections
+  </Card>
+  <Card title="Document parent space" icon="house">
+    Make it clear which space owns each piece of reusable content
+  </Card>
+</CardGroup>
+
+## Example use cases
+
+**Disclaimers and warnings:**
+Create a reusable warning about beta features and use it across all beta documentation.
+
+**Common procedures:**
+Write a step-by-step authentication procedure once and reference it in multiple API endpoint docs.
+
+**Legal text:**
+Maintain a single source of truth for terms, privacy notices, or compliance information.
+
+**Product descriptions:**
+Keep product descriptions consistent across getting started guides, tutorials, and reference docs.
+
+**Prerequisites:**
+Define common prerequisites once and reuse them across multiple tutorials.

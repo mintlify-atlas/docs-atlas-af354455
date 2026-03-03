@@ -1,0 +1,330 @@
+---
+title: Extensions reference
+description: The complete reference of OpenAPI extensions supported by GitBook
+icon: code
+---
+
+# Extensions reference
+
+You can enhance your OpenAPI specification using extensions—custom fields that start with the `x-` prefix. These extensions let you add extra information and tailor your API documentation to suit different needs.
+
+GitBook allows you to adjust how your API looks and works on your published site through a range of different extensions you can add to your OpenAPI spec.
+
+Head to our [guides section](./guides/structuring-api-reference) to learn more about using OpenAPI extensions to configure your documentation.
+
+## Page customization
+
+### x-page-title | x-displayName
+
+Change the display name of a tag used in the navigation and page title.
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags:
+  - name: users
+    x-page-title: Users
+```
+
+### x-page-description
+
+Add a description to the page.
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags:
+  - name: "users"
+    x-page-title: "Users"
+    x-page-description: "Manage user accounts and profiles."
+```
+
+### x-page-icon
+
+Add a Font Awesome icon to the page. See available icons at [fontawesome.com/search](https://fontawesome.com/search).
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags:
+  - name: "users"
+    x-page-title: "Users"
+    x-page-description: "Manage user accounts and profiles."
+    x-page-icon: "user"
+```
+
+### parent | x-parent
+
+Add hierarchy to tags to organize your pages in GitBook.
+
+<Note>
+`parent` is the official property name in OpenAPI 3.2+. If using OpenAPI versions prior to 3.2 (3.0.x, 3.1.x), use `x-parent` instead.
+</Note>
+
+```yaml openapi.yaml
+openapi: '3.2'
+info: ...
+tags:
+  - name: organization
+  - name: admin
+    parent: organization
+  - name: user
+    parent: organization
+```
+
+## Operation visibility
+
+### x-hideTryItPanel
+
+Show or hide the "Test it" button for an OpenAPI block.
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags: [...]
+paths:
+  /example:
+    get:
+      summary: Example summary
+      description: Example description
+      operationId: examplePath
+      responses: [...]
+      parameters: [...]
+      x-hideTryItPanel: true
+```
+
+### x-internal | x-gitbook-ignore
+
+Hide an endpoint from your API reference.
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags: [...]
+paths:
+  /example:
+    get:
+      summary: Example summary
+      description: Example description
+      operationId: examplePath
+      responses: [...]
+      parameters: [...]
+      x-internal: true
+```
+
+## Code samples
+
+### x-codeSamples
+
+Show, hide, or include custom code samples for an OpenAPI block.
+
+**Fields:**
+
+| Field Name | Type | Description |
+|------------|------|-------------|
+| `lang` | string | Code sample language. Value should be one of the [linguist popular languages](https://github.com/github/linguist/blob/master/lib/linguist/popular.yml) |
+| `label` | string | Code sample label, for example `Node` or `Python2.7`, *optional*, `lang` is used by default |
+| `source` | string | Code sample source code |
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags: [...]
+paths:
+  /example:
+    get:
+      summary: Example summary
+      description: Example description
+      operationId: examplePath
+      responses: [...]
+      parameters: [...]
+      x-codeSamples:
+        - lang: 'cURL'
+          label: 'CLI'
+          source: |
+            curl -L \
+            -H 'Authorization: Bearer <token>' \
+            'https://api.gitbook.com/v1/user'
+```
+
+## Enum descriptions
+
+### x-enumDescriptions
+
+Add an individual description for each of the `enum` values in your schema.
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+components:
+  schemas:
+    project_status:
+      type: string
+      enum:
+        - LIVE
+        - PENDING
+        - REJECTED
+      x-enumDescriptions:
+        LIVE: The project is live.
+        PENDING: The project is pending approval.
+        REJECTED: The project was rejected.
+```
+
+## Operation lifecycle
+
+### x-stability
+
+Mark endpoints that are unstable or in progress.
+
+**Supported values:** `experimental`, `alpha`, `beta`
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags: [...]
+paths:
+  /example:
+    get:
+      summary: Example summary
+      description: Example description
+      operationId: examplePath
+      x-stability: experimental
+```
+
+### deprecated
+
+Mark whether an endpoint is deprecated or not. Deprecated endpoints will give deprecation warnings in your published site.
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags: [...]
+paths:
+  /example:
+    get:
+      summary: Example summary
+      description: Example description
+      operationId: examplePath
+      responses: [...]
+      parameters: [...]
+      deprecated: true
+```
+
+### x-deprecated-sunset
+
+Add a sunset date to a deprecated operation.
+
+**Supported values:** ISO 8601 format (YYYY-MM-DD)
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags: [...]
+paths:
+  /example:
+    get:
+      summary: Example summary
+      description: Example description
+      operationId: examplePath
+      responses: [...]
+      parameters: [...]
+      deprecated: true
+      x-deprecated-sunset: 2030-12-05
+```
+
+## Response customization
+
+### x-hideSample
+
+Hide response samples for specific response codes.
+
+```yaml openapi.yaml
+paths:
+  /pet:
+    put:
+      operationId: updatePet
+      responses:
+        200:
+          x-hideSample: true
+          description: Successful operation
+```
+
+## Authentication customization
+
+### x-gitbook-prefix
+
+Customize the authorization prefix shown in security schemes.
+
+<Warning>
+`x-gitbook-prefix` is not supported for `http` security schemes because these schemes must follow standard IANA authentication definitions. [Learn more](https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml)
+</Warning>
+
+```yaml openapi.yaml
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-gitbook-prefix: Token
+      x-gitbook-token-placeholder: YOUR_CUSTOM_TOKEN
+```
+
+**Example output:**
+```
+Authorization: Token YOUR_CUSTOM_TOKEN
+```
+
+### x-gitbook-token-placeholder
+
+Set the default token placeholder value shown in examples.
+
+```yaml openapi.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      x-gitbook-token-placeholder: your_jwt_token_here
+```
+
+**Example output:**
+```
+Authorization: Bearer your_jwt_token_here
+```
+
+## Extension compatibility matrix
+
+| Extension | Applies To | OpenAPI Versions | Description |
+|-----------|-----------|------------------|-------------|
+| `x-page-title` / `x-displayName` | Tags | 2.0, 3.0, 3.1, 3.2 | Custom page title |
+| `x-page-description` | Tags | 2.0, 3.0, 3.1, 3.2 | Page subtitle |
+| `x-page-icon` | Tags | 2.0, 3.0, 3.1, 3.2 | Font Awesome icon |
+| `parent` / `x-parent` | Tags | 3.2 / 2.0, 3.0, 3.1 | Hierarchical navigation |
+| `x-hideTryItPanel` | Operations, Root | 2.0, 3.0, 3.1, 3.2 | Hide test functionality |
+| `x-codeSamples` | Operations | 2.0, 3.0, 3.1, 3.2 | Custom code examples |
+| `x-enumDescriptions` | Schemas | 2.0, 3.0, 3.1, 3.2 | Enum value descriptions |
+| `x-internal` / `x-gitbook-ignore` | Operations | 2.0, 3.0, 3.1, 3.2 | Hide from docs |
+| `x-stability` | Operations | 2.0, 3.0, 3.1, 3.2 | Lifecycle status |
+| `deprecated` | Operations | 2.0, 3.0, 3.1, 3.2 | Deprecation flag |
+| `x-deprecated-sunset` | Operations | 2.0, 3.0, 3.1, 3.2 | Deprecation date |
+| `x-hideSample` | Responses | 2.0, 3.0, 3.1, 3.2 | Hide response samples |
+| `x-gitbook-prefix` | Security Schemes | 2.0, 3.0, 3.1, 3.2 | Auth prefix |
+| `x-gitbook-token-placeholder` | Security Schemes | 2.0, 3.0, 3.1, 3.2 | Token placeholder |
+
+## Further reading
+
+<CardGroup cols={2}>
+  <Card title="Structuring API reference" icon="sitemap" href="./guides/structuring-api-reference">
+    Learn how to organize your API documentation
+  </Card>
+  <Card title="Custom code samples" icon="code" href="./guides/custom-code-samples">
+    Add language-specific examples
+  </Card>
+  <Card title="Managing operations" icon="sliders" href="./guides/managing-operations">
+    Control operation visibility and lifecycle
+  </Card>
+  <Card title="Test it button" icon="flask" href="./guides/test-it-button">
+    Configure interactive testing
+  </Card>
+</CardGroup>

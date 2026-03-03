@@ -1,0 +1,108 @@
+---
+title: Site structure
+description: Add structure to your published documentation using site sections and variants
+icon: window-restore
+---
+
+The content on your site comes from spaces in your organization. You can link one or multiple spaces. GitBook will publish each one and handle the navigation between spaces.
+
+## Content types
+
+Linked spaces can serve as one of two different content types, which determine how GitBook treats them in relation to each other and shows them to visitors.
+
+<CardGroup cols={2}>
+  <Card title="Site sections" icon="browser">
+    Split your site into distinct parts — ideal for multiple products or parts of your organization.
+  </Card>
+  <Card title="Content variants" icon="code-branch">
+    Publish multiple versions of the same content — ideal for localization, versioning, and more.
+  </Card>
+</CardGroup>
+
+## Managing your site structure
+
+By managing the structure of your site, you can also manage your site's top navigation bar. This navigation bar allows users to jump to different site sections and site section groups.
+
+From your docs site's dashboard, open the **Settings** tab in the site header, then click **Structure**. Here you can see all the content of your site, divided into sections and variants.
+
+Your site starts out with a single section with your site's name and a single variant with the space you linked during your site's set-up.
+
+### Linking a space to your docs site
+
+To add a site section, click the **Add section** button underneath the table and choose a space to link as a section. The new section is then added to the table and will be available to visitors as a tab at the top of your site.
+
+To add a variant, click the **Add variant** button in the section you'd like to add to, then choose a space to link. The new variant is then added to the list of variants within the chosen section and will be available to visitors in the variant dropdown on your site.
+
+When you add a space — as a variant or a section — a name and slug will be generated based on the space's title.
+
+### Changing sections or variants
+
+You can change the name and slug of each of sections and variants by clicking the **Edit** button in the table row of the item you'd like to edit. This will open a modal. Edit the field(s) you'd like to change, then click the **Save** button to save.
+
+<Note>
+  Changing a linked space's slug will change the space's canonical URL. GitBook will create an automatic redirect from the old URL to the new one.
+</Note>
+
+To replace a section or variant, first delete it by clicking its **Edit** button, then click the **Delete** button in the lower left of the modal. Once the item is deleted, click the **Add section** or **Add variant** button to add it again.
+
+### Reordering sections or variants
+
+Your site displays sections and variants in the order that they appear in your **Site structure** table. They can be reordered by grabbing the **Drag handle** and moving it up or down. The changed order will be reflected on your site immediately.
+
+You can also use the keyboard to select and move content. Select a section or variant with the space bar, then use the arrow keys to move it up or down. Hit the space bar again to confirm the new position.
+
+### Setting default content
+
+If you have multiple sections in your site, one section will be marked as **Default**. This section is shown when visitors arrive on your site, and is served from your site's root URL. Other sections each have a slug that is appended to the root URL.
+
+If you have multiple variants within a section, one variant will be marked as the default. Like sections, the default variant is shown when visitors arrive on your site, or when they visit a section. Other variants each have a slug that's appended to the section's URL.
+
+To set a space as default, click on the **Actions menu** in the space's table row and then click **Set as default**.
+
+<Note>
+  Setting a space as default removes its slug field, as it will be served from the section root instead. GitBook redirects the space's slug to the appropriate path, to ensure visitors keep seeing your content.
+</Note>
+
+## Site sections
+
+<Note>
+  Site sections are available on Ultimate site plans.
+</Note>
+
+With site sections, you can centralize all your documentation and create a seamless experience for your users. Site sections are perfect for organizing your documentation — whether you're managing separate products, or catering to both end-users and developers with content tailored to each.
+
+You can also group site sections together. Doing so will create a drop-down menu in your navigation bar — ideal for adding hierarchy to your site sections.
+
+### Adding a section to your docs site
+
+From your docs site's dashboard, open the **Settings** tab in the site header, then click **Structure**. To add a site section, click the **New section** button underneath the table and choose a space to link as a section.
+
+### Create a site section group
+
+You can group site sections together under a single heading. Site section groups will appear as a drop-down in your site's nav. Site sections in a group can also include an optional description, which appears below the section title in the drop-down menu.
+
+To create a group, click the arrow next to the **New section** button and choose **New section group**. Give your new group a name, then click **Add section** in the modal to add sections to your group.
+
+## Content variants
+
+You can publish multiple versions of the same documentation as part of a single docs site. These variants will be available to the end users via the space switcher in the top-left corner of the published site.
+
+### Add multiple languages or versions
+
+A site with multiple variants is useful if you need to group together the content of your spaces — such as if you're documenting multiple versions of an API (v1, v2, v3, etc.), or documenting your content in different languages.
+
+<Note>
+  The spaces you link can contain any content, but it's recommended to use variants as variations of the same content. If the spaces you link are semantically different from each other, consider adding them as site sections instead.
+</Note>
+
+When adding a translation or multiple languages as a variant, it's best practice to set the language of your variant to give your users the best experience when navigating your docs.
+
+### Remove content from a site
+
+To remove the content of a space from a site, open the **Settings** tab from your docs site dashboard, then click **Structure** to find the content you want to remove.
+
+Open the **Actions menu** for the space you want to remove and choose **Remove**.
+
+<Note>
+  Removing a space from your site will remove it from the published site, but will not delete the space or the content within it.
+</Note>

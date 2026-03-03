@@ -1,0 +1,156 @@
+---
+title: 'Review change requests with GitBook Agent'
+description: 'Collaborate with GitBook Agent to review or work on change requests'
+---
+
+As well as creating content, GitBook Agent can review your change requests to quickly find and fix errors, suggest improvements and more.
+
+The Agent understands the context of the rest of your docs content, and you can also add your team's style guide to ensure it reviews your changes while sticking to your team's style.
+
+## Review change requests with GitBook Agent
+
+You can request a review from GitBook Agent in any open change request in your organization.
+
+<Steps>
+  <Step title="Open a change request">
+    Navigate to any open change request in your organization.
+  </Step>
+  
+  <Step title="Select GitBook Agent as a reviewer">
+    Add GitBook Agent as a reviewer. Once selected, the Agent will go through your changes and review for accuracy, clarity, and more — through the context of your published site and style guide.
+  </Step>
+  
+  <Step title="Review suggestions">
+    The Agent will suggest further changes if needed. If you want the Agent to implement them, you can tell it to do so either through the chat window or by tagging it in a comment.
+  </Step>
+  
+  <Step title="Merge your changes">
+    Once you're happy with your changes, you can merge the change request to publish the changes live.
+  </Step>
+</Steps>
+
+## What GitBook Agent reviews for
+
+When reviewing your change requests, GitBook Agent checks for:
+
+- **Spelling and grammar errors** — Identifies typos, grammatical mistakes, and punctuation issues
+- **Style guide compliance** — Ensures content follows your organization's style guide and custom instructions
+- **Clarity and readability** — Suggests improvements to make content clearer and easier to understand
+- **Consistency** — Checks that terminology, formatting, and tone match the rest of your documentation
+- **Accuracy** — Verifies that information aligns with existing documentation and identifies potential gaps
+- **Completeness** — Flags missing information or sections that could benefit from additional detail
+
+<Info>
+GitBook Agent acts as a docs linter, identifying or fixing errors, suggesting improvements and flagging style guide deviations.
+</Info>
+
+## Update change requests with GitBook Agent
+
+GitBook Agent works with you like another member of your team. Inside of a change request, you can open the GitBook Agent chat window to start collaborating.
+
+You can ask it to do things like:
+
+- Write new content or expand existing sections
+- Fix typos and spelling errors
+- Rewrite unclear or outdated explanations
+- Review pages for accuracy, clarity, and completeness
+- Generate or update code examples
+- Identify missing docs or gaps in workflows
+
+### Open the chat window
+
+To open the GitBook Agent chat window in a change request, click the **GitBook Agent** button in the space header bar. This will open the Agent's chat window on the right side of the app.
+
+From here, you can write prompts to tell the Agent what you need. It will explain what it's doing as it follows your instructions, with changes appearing in your space as it works.
+
+### Tag GitBook Agent in a comment
+
+You can also collaborate with GitBook Agent by tagging it in comments on specific blocks.
+
+<Steps>
+  <Step title="Add a comment">
+    Click **Comment on block** on any block where you want the Agent's help.
+  </Step>
+  
+  <Step title="Tag the Agent">
+    Type `@gitbook` in the comment to tag the Agent.
+  </Step>
+  
+  <Step title="Describe what you need">
+    Tell the Agent what you want it to do with this specific block.
+  </Step>
+  
+  <Step title="Review the results">
+    GitBook Agent will update the content based on your prompt, then reply to your comment explaining what it did.
+  </Step>
+</Steps>
+
+## Example review prompts
+
+Here are some example prompts you can use when asking GitBook Agent to review or update change requests:
+
+```
+Review this change request for style guide compliance
+```
+
+```
+Check all code examples for accuracy and completeness
+```
+
+```
+Identify any sections that could be clearer or more concise
+```
+
+```
+Suggest improvements to make this content more actionable
+```
+
+```
+Flag any inconsistencies with existing documentation
+```
+
+<Tip>
+You can give the Agent follow-up instructions or edit the content directly yourself at any point, allowing you to work alongside GitBook Agent as a collaborative partner.
+</Tip>
+
+## Best practices for reviews
+
+### Provide context
+
+When asking GitBook Agent to review changes, provide context about what you're trying to achieve. This helps the Agent give more relevant and actionable feedback.
+
+For example, instead of:
+```
+@gitbook review this page
+```
+
+Try:
+```
+@gitbook review this page for clarity and ensure it's appropriate for 
+beginners who are new to our API
+```
+
+### Be specific about what to check
+
+If you want the Agent to focus on specific aspects of your content, tell it explicitly.
+
+For example:
+```
+@gitbook review this change request and focus on:
+- Technical accuracy of code examples
+- Consistency with our existing API documentation
+- Proper use of our product terminology
+```
+
+### Iterate on feedback
+
+Don't expect perfect results on the first try. Use GitBook Agent's feedback as a starting point, then refine with follow-up prompts:
+
+```
+Thanks for the suggestions. Can you make the introduction more 
+concise while keeping the key points?
+```
+
+### Combine AI review with human review
+
+While GitBook Agent is excellent at catching errors and suggesting improvements, it works best when combined with human review. Use the Agent to handle initial checks, then have team members review for strategic decisions and nuanced feedback.

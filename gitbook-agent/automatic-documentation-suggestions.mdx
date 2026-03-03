@@ -1,0 +1,179 @@
+---
+title: 'Automatic documentation suggestions'
+description: 'Learn how GitBook Agent works in the background to keep your documentation up-to-date'
+---
+
+<Info>
+**This feature is currently in early access**
+
+Head to **Organization Settings → GitBook Agent** to request access.
+</Info>
+
+GitBook Agent can connect to the same signals your team uses to understand both your product and what your users need: support conversations, Slack threads, GitHub issues, and more.
+
+With this context, the Agent can proactively identify gaps, propose updates and generate docs changes automatically.
+
+GitBook Agent is trained on your organization's content, meaning it has the context of your team's writing style, structure, and tone-of-voice. And you can add custom instructions for the Agent to follow.
+
+## How it works
+
+<Steps>
+  <Step title="Connect a source">
+    To allow GitBook Agent to suggest automatic docs improvements, you'll first need to connect a source.
+    
+    After you connect one or more sources, the Agent will start working in the background to collect and analyze your data.
+    
+    ### Available connectors
+    
+    GitBook Agent can pull in context from:
+    - **Email** — Forward threads to a dedicated email address
+    - **Intercom** — Pull context from resolved or closed conversations
+    - **Slack** — Analyze threads where the Agent is tagged
+    - **Third-party apps** — Connect thousands of apps using Zapier or Relay.app
+  </Step>
+  
+  <Step title="Explore how GitBook Agent analyzes your data">
+    After connecting a source, GitBook Agent will categorize that contextual information into conversations, issues, and topics.
+    
+    It uses these in combination to suggest automatic improvements to your docs, which are opened as change requests.
+    
+    To review the data GitBook Agent analyzes, head to your organization's settings, then open the **Data explorer** tab in the **GitBook Agent** section.
+    
+    ### Data categorization
+    
+    GitBook Agent organizes data into three categories:
+    
+    **Conversations**
+    
+    Raw data that the agent has indexed from your connectors. The Agent analyzes them and assigns an impact score. Conversations are then split into issues.
+    
+    **Issues**
+    
+    Standalone data points that have been identified within a conversation. GitBook Agent assigns them an impact score. A conversation may contain more than one issue.
+    
+    **Topics**
+    
+    Groups of issues that are related to one another. By grouping issues together, GitBook Agent can create useful, context-driven change requests for your team. They update automatically as new conversations and issues are processed.
+    
+    <Tip>
+    GitBook Agent categorizes data and makes proactive suggestions for your docs automatically. You don't need to do anything with this data — it's available for visibility.
+    </Tip>
+  </Step>
+  
+  <Step title="Review change requests made by GitBook Agent">
+    As more data flows in, GitBook Agent will have enough context to start making suggestions — by opening new change requests in the relevant spaces.
+    
+    You can edit change requests opened by GitBook Agent just like any other change request — and anyone on your team can review them, as long as they have the right permissions.
+    
+    You can also request a review from GitBook Agent to have it analyze the changes it has suggested.
+  </Step>
+  
+  <Step title="Collaborate with GitBook Agent on changes">
+    GitBook Agent can also act as a writing partner, allowing you to plan, write, re-write, or update anything within a change request.
+    
+    When reviewing a change request from the change requests screen, opening GitBook Agent will allow you to chat with it directly to make changes in the context of the change request you're working on.
+    
+    You can also add comments to specific blocks, and tag @gitbook to ask GitBook Agent to make a change.
+  </Step>
+</Steps>
+
+## Connecting a source
+
+Head to your organization's settings, and into the **GitBook Agent** section. From here, you'll be able to configure the different connectors in order to successfully connect your desired tool.
+
+Each connector works slightly differently, and may contain different functionality.
+
+### Email connector
+
+The email connector is a versatile connector that allows you to provide context to GitBook Agent through a dedicated email address.
+
+There's no configuration to use the email connector — it will work out of the box.
+
+**Add email threads to GitBook Agent**
+
+1. Add any email thread to the Agent by forwarding the email thread to the dedicated email address provided in GitBook Agent's settings.
+
+**Use the email connector to connect third party apps**
+
+The email connector is the most versatile way of providing context to GitBook. Using tools like Zapier or Relay.app, you're able to connect thousands of third party apps.
+
+In either tool, set up a new workflow/connection, and make sure the output is sent to the dedicated email address provided in GitBook Agent's settings.
+
+### Intercom connector
+
+The Intercom connector allows GitBook Agent to pull in context from resolved or closed conversations.
+
+Any time a conversation is closed by your support team, the Intercom connector will send the full context of the conversation to GitBook Agent. The Agent will use this context to generate issues and topics, which are then used to generate an actionable change request that can be reviewed by your team.
+
+**Connect Intercom**
+
+1. In GitBook Agent's settings, click into the Intercom connector and authorize Intercom with your account.
+2. Once signed in, GitBook Agent is ready to start analyzing your closed support tickets.
+
+**Add Intercom conversations to GitBook Agent**
+
+The Intercom connector works in the background — once it's installed and configured, it will run in the background and add resolved or closed conversations to GitBook Agent automatically.
+
+### Slack connector
+
+The Slack connector allows GitBook Agent to pull in context from threads it's tagged in.
+
+Once the Slack connector is called in a thread, it will analyze the context of the thread, and send the full context of the conversation to your GitBook Agent. The Agent will then use this context to generate issues and topics, which are then used to generate an actionable change request that can be reviewed by your team.
+
+**Connect Slack**
+
+1. In GitBook Agent's settings, click into Slack connector and authorize Slack with your account.
+2. Install the Slack bot into your organization's Slack workspace.
+
+**Add Slack threads to GitBook Agent**
+
+1. Call `@gitbook` inside of a thread that you would like to ingest.
+2. Optionally add extra context that the Agent can use, such as:
+
+```
+@gitbook use this conversation to better document our API reference.
+```
+
+## Exploring your data
+
+You can view conversations, issues, and topics by opening **Organization settings** > **GitBook Agent** > **Data Explorer**.
+
+### View conversations
+
+Conversations are the raw data that is sent to GitBook Agent from your connectors. The Agent analyzes them and assigns an impact score, which is added to the metadata from when the conversation was originally ingested.
+
+Conversations are then split into issues, which are specific areas of improvement that are found within a conversation. A conversation may contain more than one issue.
+
+### View issues
+
+Issues are standalone data points that have been identified within a conversation. GitBook Agent assigns them an impact score, which is added to the metadata from when the data was ingested.
+
+Click the **Inspect** button on an issue to read a summary, along with GitBook Agent's analysis of it.
+
+### View topics
+
+Topics are groups of issues that are related to one another. By grouping issues together, GitBook Agent can create useful, context-driven change requests for your team.
+
+The Agent will assign each topic an impact score, and show the number of issues and conversations the Agent used to form the topic. They'll update automatically as new conversations and issues are processed.
+
+Click **Inspect** on any topic to see the issues used to form the topic, along with a log of GitBook Agent's thinking to process those issues and create the topic.
+
+This inspector screen also shows any change requests GitBook Agent has created based off of the topic — ready for you and your team to review.
+
+<Note>
+**Disabling a topic**
+
+If a topic isn't valuable, you can toggle the topic off from its inspector screen. Once disabled, the topic will no longer be used to create change requests for your documentation.
+</Note>
+
+## Configuration options
+
+### Add or remove published sites for GitBook Agent to modify
+
+By default, GitBook Agent will have access to create change requests in any of your published docs sites. In the GitBook Agent's settings screen, you can choose which sites to which you'd like the Agent to make suggested changes.
+
+### Add custom instructions for GitBook Agent
+
+To add custom instructions for GitBook Agent to follow, open your organization's settings and choose the **GitBook Agent** page in the sidebar.
+
+From here you're able to write custom instructions the Agent will use any time it's preparing, analyzing, and generating change requests for your docs sites.

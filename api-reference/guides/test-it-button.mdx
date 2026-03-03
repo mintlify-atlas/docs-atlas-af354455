@@ -1,0 +1,276 @@
+---
+title: Test it button
+description: Configure the interactive "Test it" functionality for your API endpoints
+---
+
+# Test it button
+
+You can configure the "Test it" button and accompanying window in GitBook using several OpenAPI extensions. These extensions help improve and configure the testing suite for users.
+
+The interactive test functionality is powered by [Scalar](https://scalar.com/) and allows users to execute live API requests directly from your documentation.
+
+## Hiding the test it button
+
+You can hide the "Test it" button from your endpoints by adding the `x-hideTryItPanel` extension to an endpoint, or at the root of your OpenAPI spec.
+
+**For a specific endpoint:**
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+tags: [...]
+paths:
+  /example:
+    get:
+      summary: Example summary
+      description: Example description
+      operationId: examplePath
+      responses: [...]
+      parameters: [...]
+      x-hideTryItPanel: true
+```
+
+**For all endpoints (at root level):**
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+x-hideTryItPanel: true
+paths:
+  # All operations will have "Test it" hidden
+```
+
+<Note>
+Hiding the test functionality is useful for documentation-only endpoints, webhooks, or operations that require complex setup that can't be easily replicated in the browser.
+</Note>
+
+## Enable authentication in the testing window
+
+The request runner can only present and apply auth if your spec declares it. Define schemes under `components.securitySchemes`, then attach them either globally via `security` (applies to all operations) or per-operation (overrides global).
+
+### Declare your auth scheme
+
+Below are common patterns. Use straight quotes in YAML.
+
+<CodeGroup>
+```yaml HTTP Bearer (e.g., JWT)
+openapi: '3.0.3'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+```
+
+```yaml API Key in header
+openapi: '3.0.3'
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+```
+
+```yaml OAuth2 (authorizationCode)
+openapi: '3.0.3'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://auth.example.com/oauth/authorize'
+          tokenUrl: 'https://auth.example.com/oauth/token'
+          scopes:
+            read:items: 'Read items'
+            write:items: 'Write items'
+```
+</CodeGroup>
+
+### Apply schemes globally or per operation
+
+<CodeGroup>
+```yaml Global security
+openapi: '3.0.3'
+security:
+  - bearerAuth: []
+paths:
+  /users:
+    get:
+      summary: List users
+      # Inherits global bearerAuth security
+```
+
+```yaml Per-operation security
+paths:
+  /reports:
+    get:
+      summary: Get reports
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: OK
+  /public/status:
+    get:
+      summary: Public status endpoint
+      security: []
+      # Empty array means no authentication required
+```
+</CodeGroup>
+
+<Note>
+When you define security schemes, GitBook automatically adds an authentication input field to the "Test it" panel, allowing users to provide their credentials.
+</Note>
+
+## Control the endpoint URL with servers
+
+The request runner targets the URL(s) you define in the `servers` array. Declare one or more servers; you can also parameterize them with variables.
+
+### Single server
+
+```yaml openapi.yaml
+openapi: '3.0.3'
+servers:
+  - url: https://api.example.com
+```
+
+### Multiple servers
+
+```yaml openapi.yaml
+servers:
+  - url: https://api.example.com
+    description: Production
+  - url: https://staging-api.example.com
+    description: Staging
+  - url: http://localhost:3000
+    description: Local development
+```
+
+Users can select which server to target from a dropdown in the test panel.
+
+### Server variables
+
+For dynamic server URLs, use variables that users can customize:
+
+```yaml openapi.yaml
+servers:
+  - url: https://{instance}.api.{region}.example.cloud
+    variables:
+      instance:
+        default: acme
+        description: Your tenant or instance slug
+      region:
+        default: eu
+        enum:
+          - eu
+          - us
+          - ap
+        description: Regional deployment
+```
+
+This allows users to input their specific instance and region before testing.
+
+### Per-operation servers
+
+You can override the global servers array for specific operations:
+
+```yaml openapi.yaml
+paths:
+  /reports:
+    get:
+      summary: Get reports
+      servers:
+        - url: https://reports.api.example.com
+          description: Reports service
+      responses:
+        '200':
+          description: OK
+```
+
+<Warning>
+Ensure your API servers have proper CORS headers configured to allow requests from your documentation domain. Otherwise, browser-based testing will fail.
+</Warning>
+
+## Complete example
+
+Here's a complete example showing authentication, servers, and test configuration:
+
+```yaml openapi.yaml
+openapi: 3.0.3
+info:
+  title: Example API
+  version: 1.0.0
+
+servers:
+  - url: https://api.example.com
+    description: Production
+  - url: https://sandbox.example.com
+    description: Sandbox
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token from /auth/login
+
+security:
+  - bearerAuth: []
+
+paths:
+  /users:
+    get:
+      summary: List all users
+      description: Returns a paginated list of users
+      responses:
+        '200':
+          description: Success
+  
+  /public/health:
+    get:
+      summary: Health check
+      description: Public endpoint to check API status
+      security: []
+      # No authentication required
+      responses:
+        '200':
+          description: API is healthy
+  
+  /admin/logs:
+    get:
+      summary: View admin logs
+      description: Internal endpoint
+      x-hideTryItPanel: true
+      # Test button hidden for sensitive endpoint
+      responses:
+        '200':
+          description: Log entries
+```
+
+## Best practices
+
+<Steps>
+  <Step title="Configure CORS properly">
+    Ensure your API allows cross-origin requests from your documentation domain. Test the "Test it" functionality thoroughly.
+  </Step>
+
+  <Step title="Provide sandbox environments">
+    Include a sandbox or staging server in your `servers` array so users can test without affecting production data.
+  </Step>
+
+  <Step title="Document authentication clearly">
+    In your security scheme descriptions, explain how users can obtain valid credentials for testing.
+  </Step>
+
+  <Step title="Use realistic examples">
+    Provide example values in your spec so the test panel is pre-populated with sensible defaults.
+  </Step>
+
+  <Step title="Hide when inappropriate">
+    Use `x-hideTryItPanel` for operations that can't be easily tested in a browser, like file uploads or webhooks.
+  </Step>
+</Steps>

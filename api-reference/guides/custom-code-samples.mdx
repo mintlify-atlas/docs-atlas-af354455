@@ -1,0 +1,172 @@
+---
+title: Custom code samples
+description: Learn how to configure custom code samples to display alongside your API endpoints
+---
+
+# Custom code samples
+
+GitBook can automatically generate generic code examples for each API operation. If you'd prefer to showcase custom or more detailed snippets, add `x-codeSamples` to your OpenAPI definition. This way, you control how your endpoints are demonstrated and can offer language or SDK-specific examples.
+
+## Why use custom code samples
+
+Custom code samples allow you to:
+
+- Show SDK-specific implementations instead of generic HTTP requests
+- Include authentication setup and initialization code
+- Demonstrate best practices for your API
+- Provide examples in the languages your users actually use
+- Add helpful comments and context
+
+## Adding code samples to operations
+
+Add the `x-codeSamples` extension to any operation in your OpenAPI specification:
+
+```yaml openapi.yaml
+paths:
+  /users:
+    get:
+      summary: Retrieve users
+      x-codeSamples:
+        - lang: JavaScript
+          label: Node SDK
+          source: |
+            import { createAPIClient } from 'my-api-sdk';
+
+            const client = createAPIClient({ apiKey: 'my-api-key' });
+            client.users.list().then(users => {
+              console.log(users);
+            });
+        - lang: Java
+          label: Java SDK
+          source: |
+            MyApiClient client = new MyApiClient("my-api-key");
+            List<User> users = client.getUsers();
+            System.out.println(users);
+```
+
+## Code sample structure
+
+Each code sample in the `x-codeSamples` array requires three fields:
+
+- **`lang`** - The programming language (e.g., JavaScript, Python, Java, Go)
+- **`label`** - A descriptive label shown in the tab (e.g., "Node SDK", "Python 3")
+- **`source`** - The actual code snippet
+
+<Note>
+The `lang` field should use standard language names from [GitHub's linguist library](https://github.com/github/linguist/blob/master/lib/linguist/popular.yml) for proper syntax highlighting.
+</Note>
+
+## Multiple language examples
+
+You can provide code samples in multiple languages for the same operation. GitBook will display them as tabs, allowing users to choose their preferred language:
+
+```yaml openapi.yaml
+paths:
+  /orders:
+    post:
+      summary: Create an order
+      x-codeSamples:
+        - lang: JavaScript
+          label: Node.js
+          source: |
+            const order = await client.orders.create({
+              items: ['item1', 'item2'],
+              total: 99.99
+            });
+        - lang: Python
+          label: Python
+          source: |
+            order = client.orders.create(
+                items=['item1', 'item2'],
+                total=99.99
+            )
+        - lang: Ruby
+          label: Ruby
+          source: |
+            order = client.orders.create(
+              items: ['item1', 'item2'],
+              total: 99.99
+            )
+        - lang: Shell
+          label: cURL
+          source: |
+            curl -X POST https://api.example.com/orders \
+              -H "Authorization: Bearer YOUR_API_KEY" \
+              -H "Content-Type: application/json" \
+              -d '{"items":["item1","item2"],"total":99.99}'
+```
+
+## SDK-specific examples
+
+Custom code samples are particularly useful for showcasing SDK usage:
+
+<CodeGroup>
+```yaml Official SDK
+paths:
+  /analytics/events:
+    post:
+      summary: Track an event
+      x-codeSamples:
+        - lang: JavaScript
+          label: JavaScript SDK
+          source: |
+            import Analytics from '@company/analytics-sdk';
+            
+            const analytics = new Analytics('YOUR_API_KEY');
+            
+            analytics.track('button_clicked', {
+              buttonId: 'signup',
+              page: '/home'
+            });
+```
+
+```yaml Community SDK
+paths:
+  /analytics/events:
+    post:
+      summary: Track an event
+      x-codeSamples:
+        - lang: Python
+          label: Python SDK (Community)
+          source: |
+            from analytics_client import Analytics
+            
+            analytics = Analytics(api_key='YOUR_API_KEY')
+            
+            analytics.track(
+                event='button_clicked',
+                properties={
+                    'buttonId': 'signup',
+                    'page': '/home'
+                }
+            )
+```
+</CodeGroup>
+
+## Best practices
+
+<Steps>
+  <Step title="Show complete, runnable examples">
+    Include all necessary imports, initialization code, and error handling. Users should be able to copy and run your examples with minimal modification.
+  </Step>
+
+  <Step title="Use realistic data">
+    Avoid placeholder values like `foo` or `bar`. Use realistic example data that helps users understand what the API expects.
+  </Step>
+
+  <Step title="Add helpful comments">
+    Include brief comments explaining non-obvious parts of the code or highlighting important configuration.
+  </Step>
+
+  <Step title="Keep examples concise">
+    Focus on the essential code for the operation. Don't include unnecessary boilerplate that obscures the main purpose.
+  </Step>
+
+  <Step title="Maintain consistency">
+    Use consistent naming, formatting, and patterns across all your code samples to make them easier to understand.
+  </Step>
+</Steps>
+
+<Warning>
+Custom code samples override GitBook's auto-generated examples. If you provide `x-codeSamples`, ensure they cover the most common use cases for your API.
+</Warning>

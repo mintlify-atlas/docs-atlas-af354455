@@ -1,0 +1,188 @@
+---
+title: Managing API operations
+description: Learn how to mark operations as experimental, deprecated, or hidden from your documentation
+---
+
+# Managing API operations
+
+It's common to have operations that are not fully stable yet or that need to be phased out. GitBook supports several OpenAPI extensions to help you manage these scenarios.
+
+## Marking operations as experimental, alpha, or beta
+
+Use `x-stability` to communicate that an endpoint is unstable or in progress. It helps users avoid non-production-ready endpoints.
+
+**Supported values:** `experimental`, `alpha`, `beta`
+
+```yaml openapi.yaml
+paths:
+  /pet:
+    put:
+      operationId: updatePet
+      x-stability: experimental
+```
+
+When you mark an operation with a stability level, GitBook displays a badge next to the operation indicating its stability status. This helps users understand which endpoints are safe for production use.
+
+<Note>
+Use stability markers to set proper expectations with your API consumers. This is especially important for public APIs where users need to understand the maturity level of different endpoints.
+</Note>
+
+## Deprecating an operation
+
+To mark an operation as deprecated, add the `deprecated: true` attribute:
+
+```yaml openapi.yaml
+paths:
+  /pet:
+    put:
+      operationId: updatePet
+      deprecated: true
+```
+
+This displays a deprecation warning on the operation in your documentation, signaling to users that they should migrate to alternative endpoints.
+
+### Adding a sunset date
+
+Optionally specify when support ends by including `x-deprecated-sunset`:
+
+```yaml openapi.yaml
+paths:
+  /pet:
+    put:
+      operationId: updatePet
+      deprecated: true
+      x-deprecated-sunset: 2030-12-05
+```
+
+The sunset date helps users plan their migration timeline and understand when the deprecated endpoint will stop working.
+
+<Warning>
+Always provide a sunset date when deprecating endpoints. This gives your users time to migrate and prevents unexpected breaking changes.
+</Warning>
+
+## Hiding an operation from the API reference
+
+To hide an operation from your API reference, add `x-internal: true` or `x-gitbook-ignore: true`:
+
+```yaml openapi.yaml
+paths:
+  /pet:
+    put:
+      operationId: updatePet
+      x-internal: true
+```
+
+This is useful for:
+
+- Internal-only endpoints that external users shouldn't access
+- Work-in-progress operations not ready for documentation
+- Legacy endpoints you want to maintain but not promote
+
+<Note>
+Hidden operations are completely excluded from your published documentation but remain in your OpenAPI spec for internal use.
+</Note>
+
+## Hiding response samples
+
+Add the `x-hideSample: true` attribute to a response object to exclude it from the response samples section:
+
+```yaml openapi.yaml
+paths:
+  /pet:
+    put:
+      operationId: updatePet
+      responses:
+        200:
+          x-hideSample: true
+          description: Successful operation
+```
+
+This is helpful when:
+
+- Response payloads contain sensitive or complex data
+- You want to simplify the documentation by hiding certain response codes
+- Auto-generated samples don't accurately represent your API
+
+## Customizing authorization prefix and token placeholder
+
+You can customize the authorization prefix (for example, `Bearer`, `Token`, or a custom string) and the token placeholder shown when using security schemes in GitBook.
+
+In your OpenAPI spec, under `components.securitySchemes`, define your scheme like this:
+
+```yaml openapi.yaml
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-gitbook-prefix: Token
+      x-gitbook-token-placeholder: YOUR_CUSTOM_TOKEN
+```
+
+**These extensions control:**
+
+- **`x-gitbook-prefix`** - Defines the prefix added before the token
+  - Example: `Authorization: Token YOUR_API_TOKEN`
+
+- **`x-gitbook-token-placeholder`** - Sets the default token value shown in examples
+  - Example: `Authorization: Bearer YOUR_CUSTOM_TOKEN`
+
+<Warning>
+`x-gitbook-prefix` is not supported for `http` security schemes because these schemes must follow standard IANA authentication definitions. [Learn more](https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml)
+</Warning>
+
+## Common patterns
+
+<CodeGroup>
+```yaml Experimental endpoint
+paths:
+  /v2/users/bulk-import:
+    post:
+      summary: Bulk import users
+      description: Import multiple users at once (experimental)
+      x-stability: experimental
+      operationId: bulkImportUsers
+```
+
+```yaml Deprecated with sunset
+paths:
+  /v1/users:
+    get:
+      summary: List users (deprecated)
+      description: Use /v2/users instead
+      deprecated: true
+      x-deprecated-sunset: 2026-06-01
+      operationId: listUsersV1
+```
+
+```yaml Internal endpoint
+paths:
+  /admin/reset-database:
+    post:
+      summary: Reset database
+      description: Internal admin endpoint
+      x-internal: true
+      operationId: resetDatabase
+```
+</CodeGroup>
+
+## Best practices
+
+<Steps>
+  <Step title="Use stability markers early">
+    Mark new endpoints as `beta` or `experimental` from the start. Promote them to stable only after thorough testing and validation.
+  </Step>
+
+  <Step title="Provide migration paths">
+    When deprecating an endpoint, always document the recommended alternative in the operation description.
+  </Step>
+
+  <Step title="Give adequate notice">
+    Set sunset dates at least 6-12 months in the future to give users time to migrate their integrations.
+  </Step>
+
+  <Step title="Document internal endpoints separately">
+    Maintain a separate OpenAPI spec for internal endpoints instead of using `x-internal` extensively.
+  </Step>
+</Steps>

@@ -1,0 +1,179 @@
+---
+title: Structuring your API reference
+description: Learn how to structure your API reference across multiple pages with icons and descriptions
+---
+
+# Structuring your API reference
+
+GitBook does more than just render your OpenAPI spec. It lets you customize your API reference for better clarity, navigation, and branding.
+
+## Split operations across multiple pages
+
+To keep your documentation organized, GitBook can split your API operations into separate pages. Each page is generated from a tag in your OpenAPI spec. To group operations into a page, assign the same tag to each operation:
+
+```yaml openapi.yaml
+paths:
+  /pet:
+    put:
+      tags:
+        - pet
+      summary: Update an existing pet.
+      description: Update an existing pet by Id.
+      operationId: updatePet
+```
+
+<Note>
+All operations with the same tag will appear on the same page in your documentation.
+</Note>
+
+## Reorder pages in your table of contents
+
+The order of pages in GitBook matches the order of tags in your OpenAPI tags array:
+
+```yaml openapi.yaml
+tags:
+  - name: pet
+  - name: store
+  - name: user
+```
+
+This will create three pages in your table of contents in the exact order shown: Pet, Store, then User.
+
+## Nest pages into groups
+
+To build multi-level navigation, use `x-parent` (or `parent` in OpenAPI 3.2+) in tags to define hierarchy:
+
+```yaml openapi.yaml
+tags:
+  - name: everything
+  - name: pet
+    x-parent: everything
+  - name: store
+    x-parent: everything
+```
+
+The above example will create a table of contents that looks like:
+
+```
+Everything
+├── Pet
+└── Store
+```
+
+<Note>
+If a page has no description, GitBook will automatically show a card-based layout for its sub-pages, making it easy to navigate to child pages.
+</Note>
+
+## Customize page titles, icons, and descriptions
+
+You can enhance pages with titles, icons, and descriptions using custom extensions in the tags section. All [Font Awesome icons](https://fontawesome.com/search) are supported via `x-page-icon`.
+
+```yaml openapi.yaml
+tags:
+  - name: pet
+    # Page title displayed in table of contents and page
+    x-page-title: Pet
+    # Icon shown in table of contents and next to page title
+    x-page-icon: dog
+    # Description shown just above the title
+    x-page-description: Pets are amazing!
+    # Content of the page
+    description: Everything about your Pets
+```
+
+**Available extensions:**
+
+- `x-page-title` (or `x-displayName`) - Override the display name
+- `x-page-icon` - Add a Font Awesome icon
+- `x-page-description` - Add a subtitle description
+- `description` - Page content shown below operations
+
+## Build rich descriptions with GitBook blocks
+
+Tag description fields support GitBook markdown, including advanced blocks like tabs, hints, and code groups:
+
+```yaml openapi.yaml
+tags:
+  - name: pet
+    description: |
+      Here is the detail of pets.
+
+      {% tabs %}
+      {% tab title="Dog" %}
+      Here are the dogs
+      {% endtab %}
+
+      {% tab title="Cat" %}
+      Here are the cats
+      {% endtab %}
+
+      {% tab title="Rabbit" %}
+      Here are the rabbits
+      {% endtab %}
+      {% endtabs %}
+```
+
+This allows you to create rich, interactive documentation within your API reference pages.
+
+## Highlight schemas
+
+You can highlight a schema in a GitBook description by using the `openapi-schemas` block. Here's an example that highlights the "Pet" schema from the "petstore" specification:
+
+```yaml openapi.yaml
+tags:
+  - name: pet
+    description: |
+      {% openapi-schemas spec="petstore" schemas="Pet" grouped="false" %}
+        The Pet object
+      {% endopenapi-schemas %}
+```
+
+This embeds the schema definition directly in your page description, making it easy for users to understand the data structures without scrolling to separate sections.
+
+## Document webhook endpoints
+
+GitBook also supports documenting webhook endpoints when using OpenAPI 3.1.
+
+You can define your webhooks directly in your OpenAPI file using the `webhooks` field, which works similarly to `paths` for regular API endpoints:
+
+```yaml openapi.yaml
+openapi: 3.1.0 # Webhooks are available starting from OpenAPI 3.1
+
+webhooks:
+  newPet:
+    post:
+      summary: New pet event
+      description: Information about a new pet in the system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pet"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+```
+
+<Note>
+Webhook support requires OpenAPI 3.1 or later. They will not work with Swagger 2.0 or OpenAPI 3.0 specifications.
+</Note>
+
+## Best practices
+
+<Steps>
+  <Step title="Use meaningful tag names">
+    Choose tag names that clearly describe the resource or feature area. These become page titles in your documentation.
+  </Step>
+
+  <Step title="Add descriptions to all tags">
+    Provide context for each section of your API with tag descriptions. This content appears at the top of each generated page.
+  </Step>
+
+  <Step title="Organize hierarchically">
+    Use parent-child relationships to create logical groupings and improve navigation for complex APIs.
+  </Step>
+
+  <Step title="Leverage icons">
+    Add Font Awesome icons to make your navigation more visual and easier to scan.
+  </Step>
+</Steps>

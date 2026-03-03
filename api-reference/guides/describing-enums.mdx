@@ -1,0 +1,240 @@
+---
+title: Describing enums
+description: Learn how to add descriptions to enum values in your API schemas
+---
+
+# Describing enums
+
+When an API operation includes an enum, you can add `x-enumDescriptions` to provide more context about each option. GitBook will display the enum values and their descriptions in a table next to the operation.
+
+## Why describe enums
+
+Enum values are often abbreviated or use technical naming conventions that aren't immediately clear to API consumers. Adding descriptions helps users understand:
+
+- What each value represents
+- When to use each option
+- The difference between similar values
+- Business logic or workflows associated with each value
+
+## Adding enum descriptions
+
+Use the `x-enumDescriptions` extension in your schema definition:
+
+```yaml openapi.yaml
+openapi: '3.0'
+info: ...
+components:
+  schemas:
+    project_status:
+      type: string
+      enum:
+        - LIVE
+        - PENDING
+        - REJECTED
+      x-enumDescriptions:
+        LIVE: The project is live.
+        PENDING: The project is pending approval.
+        REJECTED: The project was rejected.
+```
+
+GitBook will automatically render this as a formatted table showing each enum value alongside its description.
+
+## Complete example
+
+Here's a more detailed example showing enum descriptions in context:
+
+```yaml openapi.yaml
+openapi: 3.0.3
+info:
+  title: Project API
+  version: 1.0.0
+
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique project identifier
+        name:
+          type: string
+          description: Project name
+        status:
+          $ref: '#/components/schemas/ProjectStatus'
+        priority:
+          $ref: '#/components/schemas/Priority'
+    
+    ProjectStatus:
+      type: string
+      description: Current status of the project
+      enum:
+        - DRAFT
+        - PENDING
+        - IN_REVIEW
+        - APPROVED
+        - LIVE
+        - ARCHIVED
+      x-enumDescriptions:
+        DRAFT: Project is being created and edited
+        PENDING: Project has been submitted and awaiting review
+        IN_REVIEW: Project is currently being reviewed by the team
+        APPROVED: Project has been approved but not yet deployed
+        LIVE: Project is active and publicly accessible
+        ARCHIVED: Project has been archived and is no longer active
+    
+    Priority:
+      type: string
+      description: Project priority level
+      enum:
+        - LOW
+        - MEDIUM
+        - HIGH
+        - CRITICAL
+      x-enumDescriptions:
+        LOW: Non-urgent project with flexible timeline
+        MEDIUM: Standard priority, should be completed in normal workflow
+        HIGH: Important project requiring prompt attention
+        CRITICAL: Urgent project that must be addressed immediately
+
+paths:
+  /projects:
+    post:
+      summary: Create a new project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          description: Project created successfully
+```
+
+## Reusable enum schemas
+
+For enums used in multiple places, define them as reusable schemas:
+
+```yaml openapi.yaml
+components:
+  schemas:
+    OrderStatus:
+      type: string
+      description: Status of an order
+      enum:
+        - PENDING
+        - PROCESSING
+        - SHIPPED
+        - DELIVERED
+        - CANCELLED
+        - REFUNDED
+      x-enumDescriptions:
+        PENDING: Order has been placed but not yet processed
+        PROCESSING: Order is being prepared for shipment
+        SHIPPED: Order has been shipped to the customer
+        DELIVERED: Order has been delivered to the customer
+        CANCELLED: Order has been cancelled before shipment
+        REFUNDED: Order has been refunded after cancellation or return
+
+paths:
+  /orders/{orderId}:
+    get:
+      summary: Get order details
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/OrderStatus'
+```
+
+<Note>
+Defining enums as reusable schemas with `$ref` ensures consistent descriptions across your entire API documentation.
+</Note>
+
+## Inline enum descriptions
+
+You can also add enum descriptions directly in path parameters or request bodies:
+
+```yaml openapi.yaml
+paths:
+  /users:
+    get:
+      summary: List users
+      parameters:
+        - name: role
+          in: query
+          description: Filter by user role
+          schema:
+            type: string
+            enum:
+              - ADMIN
+              - EDITOR
+              - VIEWER
+              - GUEST
+            x-enumDescriptions:
+              ADMIN: Full access to all features and settings
+              EDITOR: Can create and edit content but not manage users
+              VIEWER: Read-only access to content
+              GUEST: Limited temporary access
+```
+
+## Integer and number enums
+
+Enum descriptions work with any enum type, not just strings:
+
+```yaml openapi.yaml
+components:
+  schemas:
+    HttpStatusCode:
+      type: integer
+      description: HTTP response status code
+      enum:
+        - 200
+        - 201
+        - 400
+        - 401
+        - 403
+        - 404
+        - 500
+      x-enumDescriptions:
+        200: OK - Request succeeded
+        201: Created - New resource created successfully
+        400: Bad Request - Invalid request parameters
+        401: Unauthorized - Authentication required
+        403: Forbidden - Insufficient permissions
+        404: Not Found - Resource does not exist
+        500: Internal Server Error - Server encountered an error
+```
+
+## Best practices
+
+<Steps>
+  <Step title="Always describe enums">
+    Add descriptions to all enum values, even if they seem self-explanatory. What's obvious to you may not be clear to API consumers.
+  </Step>
+
+  <Step title="Be consistent">
+    Use consistent language and structure across all enum descriptions in your API.
+  </Step>
+
+  <Step title="Explain transitions">
+    For status enums, explain what triggers transitions between states and what actions are valid in each state.
+  </Step>
+
+  <Step title="Include examples when helpful">
+    For complex enums, consider adding examples in the description to clarify usage.
+  </Step>
+
+  <Step title="Keep descriptions concise">
+    Aim for one or two clear sentences. If you need more explanation, add it to the overall schema description.
+  </Step>
+</Steps>
+
+<Warning>
+Ensure every value in your `enum` array has a corresponding entry in `x-enumDescriptions`. Missing descriptions may confuse users.
+</Warning>

@@ -1,0 +1,101 @@
+---
+title: 'GitBook Agent overview'
+description: 'Work with an AI teammate to keep your documentation accurate, complete, and up to date'
+---
+
+GitBook Agent is an AI teammate that works alongside you, helping you keep your documentation accurate, complete, and current.
+
+The Agent is deeply integrated into GitBook, so you don't need to learn new workflows to take advantage of it — it works alongside you using the processes you already know.
+
+<Info>
+If you'd like to edit your docs in your local environment using an AI assistant, you can use GitBook's skill.md file.
+</Info>
+
+## What can GitBook Agent do?
+
+GitBook Agent can:
+
+- **Write docs based on a prompt** — Ask the Agent to update a page with the latest information, replace every mention of a product name with a new name, or anything else you need.
+- **Import content into GitBook** — Attach files like PDFs, Microsoft Word documents and more in the Agent chat sidebar. The Agent can extract and format the content into pages in your space.
+- **Ideate and implement bigger changes** — Describe what you need and the Agent will open a change request, explain its planned edits, respond to your feedback, and then implement the plan you've created together.
+- **Understand your style guide** — Add your style guide into your org's settings and it will always apply it when writing or reviewing content.
+- **Follow custom, organization-level instructions** — Give the Agent specific instructions at an organization level, such as adding links in specific ways, or avoiding specific block types.
+- **Translate your documentation** — Choose the content you want to translate, select a language and the Agent will do the work of localizing your docs.
+- **Summon from a comment** — Add a comment to any block on your page, type @gitbook and tell the Agent what you need.
+- **Review change requests** — Add the Agent as a reviewer on your change request. It can act as a docs linter, identifying or fixing errors, suggesting improvements and flagging style guide deviations.
+
+## Automatic documentation suggestions
+
+The Agent can also connect to the same signals your team uses to understand your product and what your users need: support conversations, tickets, and threads from your connected tools.
+
+With this context, the Agent can proactively identify gaps, propose updates and generate docs changes automatically. So your docs can evolve with your product, and your users always get the right information when and where they need it.
+
+<Info>
+**Automatic docs suggestions are in early access**
+
+Head to **Organization Settings → GitBook Agent** to request access.
+</Info>
+
+## Key features
+
+<CardGroup cols={2}>
+  <Card title="Write and edit" icon="wand-magic-sparkles" href="/gitbook-agent/write-and-edit">
+    Create content based on a prompt or edit a single block
+  </Card>
+  <Card title="Review changes" icon="spell-check" href="/gitbook-agent/review-change-requests">
+    Ask the Agent to check your work for spelling, grammar and style
+  </Card>
+  <Card title="Translations" icon="earth-americas" href="/gitbook-agent/translations">
+    Create auto-updating localizations in multiple languages
+  </Card>
+  <Card title="Automatic suggestions" icon="message-pen" href="/gitbook-agent/automatic-documentation-suggestions">
+    Connect data sources for proactive documentation improvements
+  </Card>
+</CardGroup>
+
+## Add a style guide and custom instructions
+
+You can configure GitBook Agent by adding your team's style guide or specific instructions on how you'd like it to work with your team. The Agent will use these as context whenever it creates or edits content in your organization.
+
+<Steps>
+  <Step title="Open organization settings">
+    Navigate to your **Organization settings** and choose the **GitBook Agent** section.
+  </Step>
+  <Step title="Configure settings">
+    Click the **Settings** tab and add your instructions in the text entry field.
+  </Step>
+</Steps>
+
+You can quickly access this screen by opening the GitBook Agent chat window in a change request, then opening the **Actions menu** and choosing **Configure GitBook Agent**.
+
+### Custom instructions example
+
+Here's an example of the kind of custom instructions you could add in GitBook Agent's settings:
+
+```
+You are a technical writer at Stripe. Use clear, direct language and 
+prioritize accuracy over flourish. For guides, always introduce the 
+concept with a one-sentence summary and break content into well-structured 
+sections. For quickstarts, always use a stepper and keep every step 
+action-first and concise.
+```
+
+## FAQs
+
+<AccordionGroup>
+  <Accordion title="How does GitBook Agent use my data?">
+    We always follow our data protection practices to keep your data private.
+
+    GitBook Agent does not use your data to train AI models. We share the information you add to GitBook Agent with OpenAI for the sole purpose of providing you with GitBook AI's features. Take a look at OpenAI's privacy policy for more information.
+  </Accordion>
+
+  <Accordion title="How much does GitBook Agent cost?">
+    GitBook Agent is free for all plans while in beta.
+
+    Translations are priced separately as a monthly add-on. Visit the pricing section to find out more.
+  </Accordion>
+
+  <Accordion title="Can I override the default tone of GitBook Agent's output?">
+    Yes, you can override the default personality and tone of GitBook Agent. So if you want more verbose outputs, or for it to follow a specific style or tone, simply tell the Agent — either in the organization-wide instructions, or in an individual prompt in a change request.
+  </Accordion>
+</AccordionGroup>

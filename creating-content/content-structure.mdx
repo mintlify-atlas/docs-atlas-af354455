@@ -1,0 +1,203 @@
+---
+title: Content structure
+description: Organize your documentation with pages, spaces, and collections
+---
+
+GitBook organizes your content through three main building blocks: pages, spaces, and collections. Pages contain your actual content, spaces group related pages together, and collections organize multiple spaces.
+
+<CardGroup cols={3}>
+  <Card title="Spaces" icon="folder" href="#spaces">
+    Create a space to organize your documentation in one place
+  </Card>
+  <Card title="Pages" icon="file" href="#pages">
+    Create pages to structure and edit your documentation content
+  </Card>
+  <Card title="Collections" icon="folder-tree" href="#collections">
+    Group spaces together by topic or team
+  </Card>
+</CardGroup>
+
+## Spaces
+
+A space is a project that contains a collection of related pages. Spaces let you write content, organize pages, add integrations, and collaborate with your team.
+
+### Create a space
+
+Click the **+** button next to the **Spaces** header in the sidebar and choose **New space**. You can also create spaces inside collections.
+
+Edit a space's name by hovering over it in the space header.
+
+### Duplicate a space
+
+To duplicate a space:
+1. Open the space's **Action menu** in the sidebar
+2. Select **Duplicate**
+
+Duplicating creates a copy in the same location (organization, collection, or sub-collection).
+
+### Move a space
+
+Move spaces by:
+- Opening the **Action menu** and selecting **Move space to…**
+- Dragging and dropping spaces in the sidebar
+
+You can move spaces between collections within the same organization if you have an admin role.
+
+### Delete a space
+
+Open the space's **Action menu** and select **Delete**.
+
+<Note>
+Deleted spaces can be restored from the Trash for up to 7 days. After that, they're permanently deleted.
+</Note>
+
+## Pages
+
+A page is where you add, edit, and embed content. Pages always live inside a space, letting you group related content and create sections for different topics.
+
+When you publish your documentation, each space becomes its own docs site or site section, with all its pages appearing on that site.
+
+### Table of contents
+
+All pages in a space appear in the left sidebar's table of contents. This navigation also appears in your published site unless you hide it.
+
+<Info>
+The first page in your table of contents is always your space's landing page, even if hidden from the table of contents.
+</Info>
+
+### Create a new page
+
+In live edit mode or a change request:
+1. Click **Add new...** > **Page** at the bottom of your table of contents
+2. Or hover between pages and click the **+** icon
+
+<Note>
+If you can't create a page, you may need to enable live edits, create a change request, or check your permissions.
+</Note>
+
+### Organizing your content
+
+#### Pages and subpages
+
+A page has a title, optional description, and content area. Create subpages by dragging one page below another in the table of contents.
+
+If you add subpages to an empty parent page, GitBook automatically generates a contents page with links to all subpages.
+
+<Info>
+Avoid more than three levels of nesting to keep navigation simple.
+</Info>
+
+When you change a page title, the slug (URL ending) also updates—unless you've manually set it.
+
+**Edit title and slug:**
+1. Open the page's **Action menu**
+2. Choose **Edit title & slug**
+
+#### Page link titles
+
+Use link titles to show a shorter name in navigation while keeping a longer, SEO-friendly page title.
+
+Set a link title:
+1. Open the page's **Action menu**
+2. Choose **Edit title & slug**
+3. Enable and define the link title
+
+Link titles appear in the table of contents, pagination buttons, and relative links.
+
+#### Page groups
+
+Page groups organize related pages into sections. Create them by clicking **Add new...** > **Group**.
+
+Page groups:
+- Only appear at the top level of the table of contents
+- Cannot be nested inside other page groups
+
+Rename a page group through its **Action menu**.
+
+#### External links
+
+Add external links to your table of contents by clicking **Add new...** > **External link**. Clicking them takes users directly to the linked content.
+
+### Page icons and emojis
+
+Add icons or emojis to pages to improve scanability. They appear in the table of contents and at the top of the page.
+
+Click the **Add icon** button when hovering over the page title, or click the emoji button to the left of the title.
+
+### Page options
+
+The **Page options** menu lets you customize each page's look, feel, and visibility.
+
+#### Layout
+
+Open **Page options** by hovering over the page title. Choose from three layout presets or create a custom layout.
+
+Each layout controls:
+- Page title
+- Page description  
+- Table of contents
+- Page outline
+- Next/previous links
+- Page metadata
+
+**Page width:** Set to **Wide** to automatically expand blocks like tables, cards, and code blocks—ideal for landing pages.
+
+#### Visibility
+
+Control which pages appear in your published documentation and whether they're indexed in search or by search engines.
+
+Hide a page from the table of contents through the page's **Actions menu** > **Hide page**.
+
+#### Metadata (SEO)
+
+Use **Page options → Metadata** to help search engines understand relationships between similar pages.
+
+**Canonical URL:** The preferred URL for this page. Search engines treat it as the source of truth. Use when multiple URLs show the same content.
+
+**Alternate URLs:** Other URLs for the same content in different variants (versions, languages). Helps search engines group variants instead of treating them as duplicates.
+
+<Info>
+For versioned docs, set older pages canonical to the latest version, then list older versions as alternates on the latest page.
+</Info>
+
+### Page covers
+
+Add a page cover by clicking the **Page cover** option above the page title. A default cover is added immediately.
+
+**Page cover options:**
+- **Change cover** — Upload or select a different image (ideal size: 1990x480 pixels)
+- **Reposition** — Drag the image to adjust positioning
+- **Remove** — Delete the cover image
+- **Full width / Hero width** — Control how the cover spans the page
+
+## Collections
+
+Collections group spaces together to organize your content and manage permissions at scale.
+
+Use collections to:
+- Organize content by topic or team
+- Override organization-level permissions for specific spaces
+
+### Create a collection
+
+Click the **+** button next to **Spaces** in the sidebar. You can also create collections within other collections.
+
+### Move a collection
+
+Move collections by:
+- Opening the **Actions menu** and selecting **Move collection to…**
+- Dragging and dropping in the sidebar
+
+You can move collections into other collections or even to other organizations (with admin role in both).
+
+### Nested collections
+
+Create sub-collections by opening a collection and clicking **New collection**. You can build a collection → sub-collection → space hierarchy.
+
+### Delete a collection
+
+Open the collection's **Actions menu** and select **Delete**.
+
+<Note>
+Deleting a collection is final, but spaces inside it move to the Trash and can be restored for up to seven days.
+</Note>

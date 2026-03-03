@@ -1,0 +1,107 @@
+---
+title: Publish a docs site
+description: Publish your documentation to the internet as a docs site
+icon: globe
+---
+
+Once you've finished writing, editing, or importing your content, you can publish your work to the web as a docs site. Your docs will be published on the web and available to your selected audience.
+
+The content on your site comes from spaces in your organization. When you create a new docs site, you can create a new space, or link an existing one.
+
+## Create a docs site
+
+To create a docs site, click the plus **+** icon next to Docs site in the sidebar to launch the docs site wizard.
+
+Give your site a name, choose a starting point for your content, and select whether you want to publish your site now or later.
+
+If you already have content in a space that you would like to use, you can create a docs site directly from that space by opening the space and clicking **Share** in the top-right corner of the window. Then choose **Publish as a docs site** from the share modal.
+
+## Publishing options
+
+By default, your site will be published publicly. You can change your site's visibility in your site's settings.
+
+There are three primary options to choose from when publishing your site:
+
+<CardGroup cols={3}>
+  <Card title="Public" icon="globe" href="#public-publishing">
+    Publish your docs publicly to the web
+  </Card>
+  <Card title="Share links" icon="link" href="#private-publishing-with-share-links">
+    Publish your docs with private share links
+  </Card>
+  <Card title="Authenticated access" icon="lock" href="/publishing/authenticated-access">
+    Protect your published docs behind an OAuth sign in
+  </Card>
+</CardGroup>
+
+### Public publishing
+
+If you created your docs for a public audience, you can publish it on the web. Spaces that you publish on the web can be indexed by search engines and will be available to anyone.
+
+<Steps>
+  <Step title="Publish as public">
+    To publish your docs publicly on the web, head to the docs site you want to publish, click the **Publish** button, and choose the **Public** option.
+  </Step>
+  <Step title="Configure search indexing (optional)">
+    By default, your site will be indexed by search engines. You can disable this — meaning the docs are still available to everyone on the web, but they won't be indexed by search engines such as Google.
+  </Step>
+</Steps>
+
+<Note>
+  Docs sites that aren't indexed can be particularly helpful if you want to publish a beta version of your docs, or do large-scale user testing without impacting your SEO with potentially duplicate content.
+</Note>
+
+#### Page-level search indexing controls
+
+You can also control search indexing at the individual page level. GitBook provides two types of search indexing controls:
+
+**Internal search indexing**
+
+Controls whether pages are indexed in GitBook's internal search engine and Ask AI feature. This affects:
+- Content search within your GitBook space
+- Ask AI's ability to reference the page content
+
+**External search indexing (Web crawlers)**
+
+Controls whether search engines and web crawlers (Google, ChatGPT, etc.) can index your pages. This affects:
+- SEO and discoverability through search engines
+- Web crawler access to your content
+
+<Warning>
+  **Hierarchical inheritance behavior**: When you disable search indexing on a parent page, it automatically disables indexing for ALL sub-pages beneath it. Sub-pages cannot re-enable search indexing if their parent page has it disabled.
+</Warning>
+
+### Private publishing with share links
+
+<Note>
+  This feature is available on Premium and Ultimate site plans.
+</Note>
+
+You can share your content privately with customers or partners without needing to invite them to your organization by using share links.
+
+<Steps>
+  <Step title="Configure share links">
+    To publish your docs privately, head to the docs site's settings, click **Audience settings** button, and choose the **Share links** option.
+  </Step>
+  <Step title="Create a link">
+    Click on **Create link** to create a share link. You can review and name your share links, customize your domain and copy the link.
+  </Step>
+  <Step title="Share the link">
+    Once the link is active, a private token is generated within your URL. Sharing this link will give non-GitBook users access to your content in read mode only.
+  </Step>
+</Steps>
+
+You can generate as many links as you need from **Audience settings**. The content will be accessible to anyone following the link, and you can revoke and regenerate share links at any time.
+
+## Delete or unpublish a docs site
+
+To delete a docs site, you'll need to open your site's dashboard, then open **Site settings** from the top-right corner.
+
+## Site editing permissions
+
+Docs sites inherit the editing permissions from the spaces linked to them.
+
+You can view all the permissions set for users with access to the docs site from the permissions modal from the docs site's **Overview** page. You'll also see which space the user's permission was inherited from.
+
+- Users with **Administrator** or **Creator** permissions on any space linked to a specific docs site will have full access permissions for the site
+- Users with **Reviewer**, **Editor**, **Commenter**, or **Reader** permissions on any space linked to a specific site will get read-only permissions

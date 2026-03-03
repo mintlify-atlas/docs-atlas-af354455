@@ -1,0 +1,73 @@
+---
+title: OpenAPI
+description: Import OpenAPI specifications to create interactive, testable API documentation in GitBook
+icon: brackets-curly
+---
+
+# OpenAPI
+
+Manually writing REST API documentation can be time-consuming. GitBook streamlines this task by allowing you to import OpenAPI documents, which detail your API's structure and functionality.
+
+The OpenAPI Specification (OAS) is a framework that developers use to document REST APIs. Written in JSON or YAML, it outlines all your endpoints, parameters, schemas, and authentication schemes.
+
+Once imported into GitBook, these documents are transformed into interactive and testable API blocks that visually represent your API methods—whether the specification is provided as a file or loaded from a URL.
+
+## Supported versions
+
+GitBook supports the following OpenAPI specifications:
+
+- [Swagger 2.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md)
+- [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md)
+- [OpenAPI 3.1](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md)
+
+## Interactive API blocks
+
+OpenAPI blocks in GitBook display your API endpoints with complete documentation including:
+
+- Request parameters and body schemas
+- Response schemas and examples
+- Authentication requirements
+- Interactive testing capability
+
+<Note>
+All OpenAPI blocks are automatically generated from your specification and stay in sync when you update the spec.
+</Note>
+
+## Test it functionality
+
+GitBook's OpenAPI block supports a "Test it" functionality, which allows your users to test your API methods with data and parameters filled in from the editor.
+
+Powered by [Scalar](https://scalar.com/), you won't need to leave the docs in order to see your API methods in action. Your users can:
+
+- Fill in authentication credentials
+- Customize request parameters
+- Execute live API calls
+- View real responses
+
+## CORS requirements for URL-based specs
+
+<Warning>
+This information only applies to specs added by URL.
+</Warning>
+
+If you added your specification via URL, your API must allow cross-origin GET requests from your docs site. In your API's CORS settings, allow the exact origin where your docs are hosted:
+
+- `https://your-site.gitbook.io`
+- `https://docs.example.com`
+
+If your endpoint is public and doesn't use credentials, you can also return:
+
+```
+Access-Control-Allow-Origin: *
+```
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Add a specification" icon="plus" href="./add-specification">
+    Learn how to upload or link your OpenAPI spec
+  </Card>
+  <Card title="Insert in docs" icon="file-lines" href="./insert-in-docs">
+    Generate pages and blocks from your specification
+  </Card>
+</CardGroup>

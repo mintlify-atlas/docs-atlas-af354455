@@ -1,0 +1,181 @@
+---
+title: Formatting your content
+description: Format your text using the visual editor, keyboard shortcuts, or Markdown syntax
+---
+
+GitBook's visual editor makes it easy to format your content. Simply select text and choose a format from the context menu, use keyboard shortcuts, or write Markdown directly in the editor.
+
+<Info>
+Keyboard shortcuts shown use Mac keys. On Windows or Linux, use **Ctrl** in place of **⌘ (Command)**.
+</Info>
+
+## Text formatting
+
+GitBook supports all the classic inline Markdown formatting options:
+
+| Formatting | Markdown | Keyboard shortcut |
+|------------|----------|-------------------|
+| **Bold** | `**Bold**` | ⌘ + B |
+| *Italic* | `_Italic_` | ⌘ + I |
+| ~~Strikethrough~~ | `~~Strikethrough~~` | ⇧ + ⌘ + S |
+| `Code` | `` `Code` `` | ⌘ + E |
+
+### Examples
+
+<Tabs>
+  <Tab title="Visual editor">
+    Select text and choose formatting from the context menu, or use keyboard shortcuts while typing.
+  </Tab>
+  <Tab title="Markdown">
+    ```markdown
+    **Bold text** and _italic text_ together.
+    
+    ~~Strikethrough~~ and `inline code`.
+    ```
+  </Tab>
+</Tabs>
+
+## Links
+
+Keyboard shortcut: **⌘ + K**
+
+When you add a link, you'll be prompted to provide the URL. You can add any URL, but for links to other pages in your space, use relative links to keep references up to date automatically.
+
+### Link types
+
+**Relative links** connect to other pages in your GitBook space. If the page's URL, name, or location changes, the reference stays up to date—resulting in fewer broken links.
+
+**Absolute links** are external URLs you can paste directly into your content. Perfect for linking to resources outside your documentation.
+
+**Email links** use the `mailto:` protocol to open the user's email client with a pre-filled address.
+
+### Examples
+
+This is [a link to an external page](https://www.gitbook.com).
+
+This is a [link to another page in this space](blocks).
+
+This is a [link to a section on this page](#links).
+
+This is [a link that starts an email](mailto:support@gitbook.com).
+
+## Color and background color
+
+Click the color icon in the context menu to choose a color for text or its background.
+
+<mark style="color:orange;">This text is orange.</mark>
+
+<mark style="background-color:orange;">This text background is orange.</mark>
+
+## Inline content
+
+The inline palette lets you quickly add extra content to your text without moving your hands away from the keyboard. Press `/` in any text block to open it.
+
+### Annotations
+
+Annotations add extra context to your words without breaking the reader's flow. Use them to explain terms, insert additional information, or provide references. Readers can hover over annotated text to see the annotation.
+
+**Create an annotation:**
+1. Select the text you want to annotate
+2. Click **Annotate** in the context menu
+3. Write your annotation
+4. Click outside to continue writing
+
+<Note>
+In Markdown, annotations are written as [footnotes](https://www.markdownguide.org/extended-syntax/#footnotes). Place footnote indicators immediately after the word—not after punctuation.
+</Note>
+
+### Inline images
+
+Inline images sit alongside your text on the page. By default, they're set to their original size with a maximum width of 300px.
+
+**Size options:**
+- **Inline size** — Proportionally sized to the font (great for icons and badges)
+- **Original size** — Original size with 300px maximum width
+- **Convert to block** — Turns the image into a full-width image block
+
+### Emojis
+
+Add emojis by pressing `/` to open the inline palette, or type `:` and start typing an emoji name for autocomplete suggestions.
+
+### Math and TeX
+
+Create inline math formulas using [KaTeX](https://katex.org/docs/supported.html) syntax: $$f(x) = x * e^{2 pi i \xi x}$$
+
+<Info>
+You can also insert block-level math formulas by opening the command palette in an empty block.
+</Info>
+
+### Buttons
+
+Buttons are perfect for calls to action. Use them to send users to other pages in GitBook or external URLs.
+
+Buttons have both primary and secondary styles:
+
+<CardGroup cols={2}>
+  <Card title="Primary button" href="https://app.gitbook.com/join">
+    Use for main actions
+  </Card>
+  <Card title="Secondary button" href="#buttons">
+    Use for alternative actions
+  </Card>
+</CardGroup>
+
+### Icons
+
+Add visual indicators inline with your text. Icons use the visual style from your customization settings and support [Font Awesome](https://fontawesome.com/) icons.
+
+### Expressions
+
+Expressions display content dynamically from variables. Insert them from the `/` menu, then click to open the expression editor where you can reference and conditionally format variables.
+
+## Pasting Markdown
+
+When pasting Markdown content into the editor, use **Paste and Match Style** (⇧ + ⌘ + V on Mac, ⇧ + Ctrl + V on Windows).
+
+<Info>
+Using standard paste for Markdown copied from another editor may insert it as a code block instead of formatted text.
+</Info>
+
+## Markdown syntax reference
+
+### Headings
+
+```markdown
+# Heading 1
+## Heading 2
+### Heading 3
+```
+
+### Code blocks
+
+- ` ```⏎ ` creates a new code block
+- ` ```py⏎ ` creates a code block with Python syntax highlighting
+
+Syntax highlighting uses [Prism](https://github.com/PrismJS/prism).
+
+### Lists
+
+GitBook automatically detects and creates lists as you type:
+
+- Begin with `-` or `*` for bullet lists
+- Begin with `1.` for numbered lists  
+- Begin with `- [ ]` for task lists
+
+<Note>
+Press **Tab** to indent and **Shift+Tab** to outdent in any list.
+</Note>
+
+### Quotes
+
+Begin a line with `>` to create a block quote. Select an entire paragraph and type `>` to wrap it in a block quote.
+
+> This is a block quote.
+
+### Dividers
+
+Type `---` then press Enter to create a horizontal divider.
+
+---
+
+This is an example of a divider.

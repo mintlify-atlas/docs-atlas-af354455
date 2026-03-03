@@ -1,0 +1,173 @@
+---
+title: Version control
+description: Track changes, view historical versions, and roll back content when needed
+---
+
+GitBook's version control lets you monitor all changes to your content, view historical versions, and roll back to previous states when needed. Track every edit, merge, and sync operation in one place.
+
+## Version history
+
+The version history shows all actions that changed content in your space:
+
+- **Live edits** — Direct edits made to the space
+- **Change requests** — Merged change requests
+- **Git Sync** — Sync operations from GitHub or GitLab
+
+Each entry shows who made the change, when it happened, and what was modified.
+
+## View version history
+
+Access version history by:
+
+1. Clicking the **Version history** button in the space header
+2. Or opening the **Actions menu** next to the space title and choosing **Version history**
+
+Click any item in the list to see how your content looked when that change was made.
+
+<Info>
+Version history works similarly to viewing change requests—you can see exactly what changed and when.
+</Info>
+
+## Show changes
+
+When viewing an old version, highlight the differences between old and current content:
+
+1. Open the version you want to review
+2. Toggle **Show changes** at the bottom of the version history panel
+
+With show changes enabled, modified content is highlighted with an icon on the left of the content block.
+
+## View historical published versions
+
+For published spaces, you can preview what previous versions looked like to end users.
+
+**To view a historical published version:**
+
+1. Open version history and select a revision
+2. Copy the ID at the end of the URL
+3. Add it to your published docs URL: `/~/revisions/<id>`
+
+<Tabs>
+  <Tab title="Example">
+    If your published URL is:
+    ```
+    https://docs.example.com
+    ```
+    
+    And your revision ID is:
+    ```
+    abc123
+    ```
+    
+    The historical version URL would be:
+    ```
+    https://docs.example.com/~/revisions/abc123
+    ```
+  </Tab>
+</Tabs>
+
+## Roll back to a previous version
+
+Rolling back reverts your space's content to a previous point in time. This is helpful if you've accidentally made a breaking change or deleted content.
+
+**To roll back:**
+
+1. Open version history
+2. Find the version you want to restore
+3. Hover over it and click the **Actions button**
+4. Select **Rollback**
+5. Confirm the rollback
+
+<Warning>
+Rolling back will replace your current content with the historical version. Make sure you have the correct version selected before confirming.
+</Warning>
+
+## Version history for change requests
+
+You can also view version history for individual change requests to see the activity within that specific change request.
+
+This helps you understand:
+- What edits were made during the change request
+- Who made each edit
+- When edits occurred
+- The progression of changes before merging
+
+## Best practices
+
+<CardGroup cols={2}>
+  <Card title="Review before rollback" icon="eye">
+    Always review the historical version before rolling back to ensure it's correct
+  </Card>
+  <Card title="Use change requests" icon="code-branch">
+    Make major changes in change requests to track changes more granularly
+  </Card>
+  <Card title="Regular backups" icon="clock-rotate-left">
+    Periodically review version history to understand content evolution
+  </Card>
+  <Card title="Communicate rollbacks" icon="users">
+    Inform your team when rolling back to avoid confusion
+  </Card>
+</CardGroup>
+
+## Version history vs. Git Sync
+
+GitBook's version history is separate from Git history:
+
+**GitBook version history:**
+- Tracks changes within GitBook (live edits, change requests, Git syncs)
+- Provides visual diff view
+- Offers one-click rollback
+- Shows changes in GitBook's visual editor format
+
+**Git history:**
+- Tracks commits in your repository
+- Provides code-level changes
+- Integrates with Git workflows
+- Shows changes in Markdown format
+
+When using Git Sync, both histories work together:
+- GitBook changes sync to Git commits
+- Git commits sync to GitBook version history
+- Roll back in GitBook or revert in Git—both work
+
+<Info>
+For teams using Git Sync, you can choose whether to manage versions in GitBook's interface or through Git workflows.
+</Info>
+
+## Tracking specific changes
+
+Version history provides detailed information about each change:
+
+**Live edits:**
+- Show the editor who made changes
+- Display the timestamp
+- Highlight affected pages
+
+**Change requests:**
+- Show the change request title
+- Display who merged it
+- Link to the original change request
+- Show all pages modified
+
+**Git Sync:**
+- Show the commit message
+- Display the commit author
+- Show synchronized files
+- Link to the repository commit
+
+## Use cases
+
+**Recover deleted content:**
+If someone accidentally deletes important content, find the version before deletion and roll back.
+
+**Review content evolution:**
+Track how documentation evolved over time to understand decisions and changes.
+
+**Audit changes:**
+See who changed what and when for compliance or team coordination.
+
+**Compare versions:**
+Use show changes to see exactly what was modified between versions.
+
+**Restore stable state:**
+If recent changes introduced errors, roll back to the last known good version.

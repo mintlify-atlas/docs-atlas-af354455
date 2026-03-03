@@ -1,0 +1,167 @@
+---
+title: Broken links
+description: Find and fix broken relative links across your spaces
+---
+
+<Note>
+Broken link detection is available on Pro and Enterprise plans.
+</Note>
+
+GitBook automatically detects broken relative links in your documentation and helps you fix them. When someone breaks a link by updating it or changing its location, you'll see a notification with details on what to fix.
+
+<Info>
+Broken link detection currently works only for relative links to other GitBook content in your organization. It does not detect broken external URLs.
+</Info>
+
+## View broken links
+
+Access broken links by clicking the broken link icon in the space header when inside a change request.
+
+The **Broken links** panel shows:
+- Which pages contain broken links
+- What links are broken
+- Where they're located in your content
+
+## Fix a broken link
+
+When GitBook finds a broken link:
+
+1. Click the notification to see the page with the broken link
+2. Navigate to the broken link on the page
+3. Replace or update it with a valid link
+4. The broken link notification will disappear automatically
+
+## Scope and filters
+
+The broken links panel offers different scopes and filters to help you find specific issues:
+
+### Scope: Current change request
+
+Shows newly broken links within the current change request you're working in. This helps you catch and fix broken links before merging changes.
+
+**Use when:**
+- Reviewing a change request before merging
+- Ensuring new changes don't break existing links
+- Fixing link issues introduced by recent edits
+
+### Scope: Current space
+
+Shows all broken links within the current space, not just those from the current change request.
+
+**Use when:**
+- Auditing an entire space for broken links
+- Cleaning up legacy documentation
+- Performing regular link maintenance
+
+### Filter: Broken links
+
+Shows any broken or missing links in the space or change request.
+
+**Use when:**
+- Finding links that point to deleted or moved pages
+- Identifying invalid relative references
+- Fixing 404 errors in your documentation
+
+### Filter: Internal links
+
+Shows links to internal, unpublished content within your GitBook organization. This is useful for ensuring your published docs don't link to internal content that readers can't access.
+
+**Use when:**
+- Preparing to publish documentation
+- Ensuring all links are publicly accessible
+- Replacing internal links with published URLs
+
+<Warning>
+Internal links (starting with `app.gitbook.com/o/<organizationID>/...`) won't work for readers of your published content. Replace them with published page URLs.
+</Warning>
+
+## Why use relative links
+
+Relative links are links to pages that already exist in your space. They offer significant advantages:
+
+**Automatic updates:**
+When a page's URL, name, or location changes, relative links stay up to date automatically—reducing broken links.
+
+**Better maintenance:**
+GitBook tracks relative links and can warn you when they break.
+
+**Portability:**
+Relative links work regardless of your published URL structure.
+
+<Info>
+For links to other pages in your GitBook space, always use relative links instead of absolute URLs.
+</Info>
+
+## Best practices
+
+<CardGroup cols={2}>
+  <Card title="Use relative links" icon="link">
+    Always use relative links for internal GitBook pages to avoid broken links when URLs change
+  </Card>
+  <Card title="Check before merging" icon="check-circle">
+    Review broken links in change requests before merging to keep published docs clean
+  </Card>
+  <Card title="Regular audits" icon="magnifying-glass">
+    Periodically audit your spaces for broken links and internal links
+  </Card>
+  <Card title="Fix at the source" icon="wrench">
+    When pages move or are deleted, update or remove links at the source
+  </Card>
+</CardGroup>
+
+## How to create relative links
+
+**To insert a relative link:**
+
+1. Click where you want to insert the link, or select text
+2. Press `/` and choose **Link**, click the **Link** button, or press **⌘ + K**
+3. Start typing the title of the page you want to link to
+4. Select the page from the drop-down search results
+5. Press `Enter`
+
+GitBook creates a relative link that automatically stays up to date.
+
+<Tabs>
+  <Tab title="Creating links">
+    When you link to a page using the link picker, GitBook automatically creates a relative link.
+    
+    Example in Markdown:
+    ```markdown
+    [Link to another page](../content-structure/page.md)
+    ```
+  </Tab>
+  <Tab title="External links">
+    For external links, paste the full URL:
+    ```markdown
+    [GitBook homepage](https://www.gitbook.com)
+    ```
+  </Tab>
+</Tabs>
+
+## Preventing broken links
+
+**Before deleting pages:**
+Check if other pages link to the page you're about to delete. Update those links first.
+
+**Before moving pages:**
+Relative links should update automatically, but verify in the broken links panel after moving.
+
+**When restructuring:**
+Use the broken links panel to identify and fix any issues after major documentation restructuring.
+
+**Before publishing:**
+Switch the filter to "Internal links" to ensure no unpublished GitBook URLs are in your published docs.
+
+## Workflow integration
+
+Broken link detection integrates seamlessly with GitBook's change request workflow:
+
+1. **Create change request:** Make changes to your documentation
+2. **Automatic detection:** GitBook detects newly broken links
+3. **Fix links:** Address broken links before merging
+4. **Merge clean:** Merge change requests without broken links
+5. **Keep published docs clean:** Your published documentation stays error-free
+
+<Info>
+Broken link notifications appear automatically when GitBook detects issues. You don't need to run manual checks.
+</Info>

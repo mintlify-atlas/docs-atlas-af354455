@@ -1,0 +1,102 @@
+---
+title: Embed in your product
+description: Embed your documentation in your product or website using the Docs Embed
+icon: window-restore
+---
+
+The Docs Embed is a powerful window into your product knowledge that you can add to any product or website. Users can ask their questions to the GitBook Assistant or browse your docs directly, without leaving your product. You can open the Embed with a button, put it in any component you want, or control it completely programmatically.
+
+## Overview
+
+The Docs Embed consists of multiple tabs that get shown automatically, depending on your site's configuration:
+
+- **Assistant**: The GitBook Assistant - an AI-powered chat interface to help users find answers
+- **Docs**: A browser for navigating your documentation site
+
+You can customize and override the default configuration with custom actions, tools, suggested questions, authenticated access, and more.
+
+## Get started
+
+<Steps>
+  <Step title="Prerequisites">
+    Before embedding your docs, ensure:
+    
+    1. **Your docs are published** and accessible at a URL (e.g., `https://docs.company.com`).
+    2. **You have retrieved the embed script URL** from your site settings (Settings → AI & MCP → Embed).
+    
+    <Note>
+      If you want to use the Assistant tab, GitBook Assistant must be enabled for your docs site (Settings → AI & MCP).
+    </Note>
+  </Step>
+  
+  <Step title="Choose implementation method">
+    Pick the approach that matches your setup:
+    
+    <CardGroup cols={3}>
+      <Card title="Script tag" icon="code">
+        Drop in a `<script>` tag for the fastest setup, then customize its appearance
+      </Card>
+      <Card title="Node.js/NPM" icon="box">
+        Install via NPM for server-side rendering or build-time control
+      </Card>
+      <Card title="React component" icon="react">
+        Use prebuilt React components for seamless integration
+      </Card>
+    </CardGroup>
+    
+    <Note>
+      If your docs use authenticated access, follow the steps in how to set up the embed with authenticated docs.
+    </Note>
+  </Step>
+  
+  <Step title="Configure (optional)">
+    Customize the embed experience:
+    - Add welcome messages, custom actions, and suggestions
+    - Connect Assistant to your product APIs with custom tools
+  </Step>
+</Steps>
+
+## Implementation methods
+
+### Standalone script tag
+
+Quick setup with a `<script>` tag for the fastest implementation. This is ideal for static sites or when you want to get up and running quickly.
+
+### Node.js/NPM
+
+Install via NPM for server-side rendering or build-time control. This approach gives you more control over the embed lifecycle and is ideal for server-rendered applications.
+
+### React component
+
+Use prebuilt React components for seamless integration into React applications. This provides the most natural integration for React-based products.
+
+## Configuration options
+
+### Customizing the embed
+
+You can customize various aspects of the embed:
+
+- **Welcome messages** - Customize the initial greeting users see
+- **Suggested questions** - Pre-populate questions to help users get started
+- **Custom actions** - Add buttons that trigger specific workflows in your product
+- **Styling** - Match the embed to your product's design system
+
+### Creating custom tools
+
+Connect Assistant to your product APIs by creating custom tools. This allows the Assistant to:
+
+- Fetch real-time data from your application
+- Trigger actions in your product
+- Provide personalized answers based on user context
+
+## Using with authenticated docs
+
+<Note>
+  If your docs use authenticated access, you'll need to configure the embed to pass authentication tokens. This ensures that users see the appropriate content based on their permissions.
+</Note>
+
+The embed supports seamless integration with GitBook's authenticated access feature, allowing you to show personalized content to authenticated users.
+
+## API reference
+
+For the complete API reference and source code, see the [`@gitbook/embed` package on GitHub](https://github.com/GitbookIO/gitbook/tree/main/packages/embed).

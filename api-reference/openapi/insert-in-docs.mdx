@@ -1,0 +1,97 @@
+---
+title: Insert API reference in your docs
+description: Generate complete API documentation from your OpenAPI spec or insert individual operations and schemas
+---
+
+# Insert API reference in your docs
+
+GitBook allows you to automatically generate pages related to the endpoints you have in your OpenAPI spec. These pages will contain OpenAPI operation blocks, allowing you and your visitors to test your endpoints and explore them further based on the information found in the spec.
+
+<Note>
+Endpoints added from your spec will continue to be updated anytime your spec is updated. See the [update your specification](add-specification#update-your-specification) section for more info.
+</Note>
+
+## Automatically create OpenAPI pages from your spec
+
+After you've [added your OpenAPI spec](add-specification), you can generate endpoint pages by inserting an **OpenAPI Reference** in the table of contents of a space.
+
+<Steps>
+  <Step title="Generate pages from OpenAPI">
+    In the space where you'd like to generate endpoint pages, click the **Add new...** button from the bottom of your space's table of contents.
+
+    From the menu, select **OpenAPI Reference**.
+  </Step>
+
+  <Step title="Choose your OpenAPI spec">
+    Select your previously uploaded OpenAPI spec from the list.
+
+    Optionally, you can choose to add a models page that references all your OpenAPI schemas. This creates a dedicated page listing all schema definitions from your spec.
+
+    Click **Insert** to automatically add your endpoints to your space.
+  </Step>
+
+  <Step title="Manage your API operations">
+    GitBook will automatically generate pages based on your OpenAPI spec and the tags defined in its definition.
+
+    The structure of your API reference will mirror the organization defined in your spec, with operations grouped by tags.
+
+    Head to [structuring your API reference](../guides/structuring-api-reference) to learn more about organizing your operations through your OpenAPI spec.
+  </Step>
+</Steps>
+
+<Note>
+Pages generated from your OpenAPI spec will update automatically when you update the specification. This ensures your documentation always stays in sync with your API.
+</Note>
+
+## Add an individual OpenAPI block
+
+Alternatively, you can add OpenAPI operations or schemas from your spec individually to pages throughout your docs. This is useful when you want to embed specific endpoints within conceptual documentation or guides.
+
+<Steps>
+  <Step title="Add a new OpenAPI block">
+    Open the block selector by pressing `/` on your keyboard, and search for "OpenAPI".
+
+    Select the **OpenAPI** block type from the results.
+  </Step>
+
+  <Step title="Choose your OpenAPI spec">
+    Select your previously uploaded OpenAPI spec from the dropdown list.
+
+    Click **Continue** to proceed to selecting specific operations.
+  </Step>
+
+  <Step title="Choose operations or schemas to insert">
+    Browse through your available operations and schemas.
+
+    You can select:
+    - **Operations** (API endpoints like GET /users, POST /items)
+    - **Schemas** (data models and object definitions)
+
+    Select the items you want to insert in your documentation and click **Insert**.
+  </Step>
+</Steps>
+
+## Working with OpenAPI blocks
+
+Once inserted, OpenAPI blocks display:
+
+- Complete endpoint documentation
+- Request and response schemas
+- Authentication requirements
+- Interactive "Test it" functionality
+- Code samples in multiple languages
+
+<Warning>
+Do not manually edit content within auto-generated OpenAPI blocks. Any manual changes will be overwritten when the specification is updated. Instead, update your OpenAPI spec file directly.
+</Warning>
+
+## Organizing your API reference
+
+For best results:
+
+- Use tags in your OpenAPI spec to group related endpoints
+- Add descriptions to tags for page-level documentation
+- Use extensions like `x-page-title` and `x-page-icon` to customize appearance
+- Structure operations hierarchically with `x-parent` for nested navigation
+
+Learn more in our [structuring guide](../guides/structuring-api-reference).

@@ -1,0 +1,141 @@
+---
+title: SSO and SAML
+description: Learn how to share your GitBook content via SSO and SAML
+icon: building-lock
+---
+
+<Info>
+  SSO and SAML features are available on Enterprise plans.
+</Info>
+
+While manually managing your organization members is fine for smaller teams or folks who want tonnes of control, sometimes you just need to open things up in a more automated way. GitBook allows you to configure this in a couple of ways, through a basic email domain SSO, and a more complex SAML integration.
+
+## Single sign-on via email domain
+
+When you create or manage your organization, you can add a list of email domains that you want to allow to access your GitBook organization. This means that anyone with a verified email address that matches your configured SSO domains will be allowed to join your organization.
+
+You can enable email domain SSO in the **SSO** section of your organization's **Settings**; enter a comma-separated list of email domains you'd like to allow SSO access for and you're good to go.
+
+<Info>
+  Anyone who joins via an SSO email domain will default to guest access, you can change their role at any time in the members section of your organization settings.
+</Info>
+
+## SAML-based single sign-on
+
+**SAML-based Single Sign-On** (SSO) gives members access to GitBook through an identity provider (IdP) of your choice.
+
+GitBook easily integrates with your existing identity provider (IdP) so you can provide your employees with single sign-on to GitBook using the same credentials and login experience as your other service providers.
+
+By using SSO, your employees will be able to log into GitBook using the familiar identity provider interface, instead of the GitBook login page. The employee's browser will then forward them to GitBook. The IdP grants access to GitBook when SSO is enabled and GitBook's own login mechanism is deactivated. In this way, authentication security is shifted to your IdP and coordinated with your other service providers.
+
+## Prerequisites for SSO with GitBook
+
+Before setting up SAML SSO, ensure you have:
+
+- Your company's identity provider (IdP) must support the **SAML 2.0** standard
+- You must have administrative permission on the IdP
+- You must be an administrator of the GitBook organization you want to set SAML up on
+
+## Set up on GitBook
+
+You must be an organization admin to enable SSO for your GitBook organization.
+
+After configuring SSO on your IdP, you will be able to enter metadata. When the setup is successful, administrators will see a confirmation dialog and the URL of the SSO login for end-users will be displayed. **GitBook does not send announcement emails when set up is complete**. It is the responsibility of the administrator to notify company employees (and convey the login URL to them) so they can access GitBook via SSO.
+
+<Info>
+  Organization admins can still sign in with non-SSO methods, so you may still see Google, GitHub, or email buttons. This is expected, even with **Enforce SSO** enabled. This prevents a lockout from your organization after a bad SSO setup. Admins can always sign in and remove or fix SSO settings.
+</Info>
+
+You'll need the following from your IdP metadata to register a SAML provider:
+
+- A **label** – this can be anything, it'll be displayed on the login page
+- An **entity ID**
+- A **Single Sign On URL**
+- An **X.509 certificate** – make sure you copy and paste the whole certificate!
+
+## Set up on the IdP
+
+Most SAML 2.0 compliant identity providers require the same information about the service provider (GitBook, in this case) for set up. These values are specific to your GitBook organization and are available in the **Settings -> SSO** tab of the GitBook organization where you want to enable SSO.
+
+Most of these values can be copied directly into your IdP to complete configuration of SAML.
+
+GitBook requires that the **NameID** contain the user's email address. Technically we are looking for: `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` as the Name-ID format – many providers (such as Google) will allow you set a format such as **EMAIL**.
+
+### Custom attributes
+
+GitBook will pull the following custom attributes from the SAML assert response and use them when creating the user.
+
+| Field | Description |
+| --- | --- |
+| `first_name` | `first_name` and `last_name` fields will be combined to produce the display name for the user in GitBook |
+| `last_name` | `first_name` and `last_name` fields will be combined to produce the display name for the user in GitBook |
+
+## Creating end-user accounts
+
+To add members, create accounts for them in your IdP. The first time a new member logs in to GitBook via the IdP, a GitBook account will be created for them via automatic IdP provisioning. The user will have access to organization resources as an organization member.
+
+<Warning>
+  Set-up requires lower case email addresses. Do not use mixed case email addresses.
+</Warning>
+
+## Removing accounts
+
+Removing a member from the IdP will prevent the user from being able to sign in to the corresponding GitBook account, **but will not remove the account from GitBook**. We advise also removing the account from the GitBook organization.
+
+## Controlling access
+
+Once you have set up SAML SSO, the onus is on the IdP to control who can access your GitBook account.
+
+## Security notice
+
+If you have an existing GitBook account under the same email address as the one we get from Identity Provider and you are not a member of the organization you're trying to sign into, we will not be able to automatically add you to the organization with the SAML configuration due to security reasons. You have two options:
+
+1. Delete your existing GitBook account and then log into your desired organization with SAML. GitBook will then create a new account for you and you will be added to the organization
+2. Or, ask your admin to invite you to the organization:
+
+If your organization does not have "Enforce SSO" enabled, an admin of your organization can invite users through the Members page in your organization's settings.
+
+If your organization has enabled "Enforce SSO", an admin will have to use GitBook's `invites` API endpoint to invite users to the organization. A call to this API would look like the following:
+
+```bash
+curl --request POST \
+  --header "Authorization: Bearer <your_access_token>" \
+  --url "https://api.gitbook.com/v1/orgs/<org_id>/invites" \
+  --header 'Content-Type: application/json' \
+  --data-raw '{ "sso": true, "role": "<role>", "emails":["<email>"] }'
+```
+
+## SSO members vs non-SSO
+
+Users who have created a GitBook account with an email used in your SAML Identity Provider, or joined your organization prior to the configuration of SAML, might see their login with SSO being blocked with a message prompting them to "Log in with your existing credentials".
+
+### Origin of the message and security considerations
+
+The first principle of our SAML SSO implementation is security.
+
+If a user account has been created using an email address `bob@company.com`, and later on Bob attempts to log in with the company SAML, **GitBook cannot verify the integrity of the email address returned by the identity provider** and thus cannot authenticate them as the current account `bob@company.com`.
+
+To prevent the creation of two accounts associated with the `bob@company.com` email address, **GitBook indicates to the user that they should log in with their original account. The organization administrator, later on, decides how to handle the case**.
+
+By enabling SSO on a user account, an organization administrator indicates to GitBook that the relationship between the email address of the account and the profile in your SAML Identity Provider can be trusted.
+
+### Remediations
+
+When a user sees their SSO login not succeeding with the message "Log in with your existing credentials", actions can be taken by the organization administrator to authorize them.
+
+#### If the user account is already a member of the organization:
+
+- An organization administrator can enable SSO on your organization membership from the administration dashboard. Next time, the user account will be authorized to login into the organization using the SSO flow.
+
+or
+
+- The user can log in to their account using the credentials initially used to create the account. For example, by clicking on "Continue with email" to receive an email sign-in link.
+- SSO login will not be automatically enabled for this user, and an organization administrator has to enable it explicitly from the admin dashboard.
+
+#### If the user account is not yet a member of the organization:
+
+- An organization administrator should add the user account to the organization by inviting their email address from the admin dashboard. The user account can then directly be enabled for SSO login.
+
+### Enabling SSO login for members
+
+Organization administrators can enable SSO login for members by linking their accounts to SSO. Doing this indicates to GitBook that the user account can be trusted as being connected to the identity in your provider.

@@ -1,0 +1,292 @@
+---
+title: Blocks
+description: Add and edit blocks to build rich, interactive documentation
+---
+
+GitBook is a block-based editor. Add different kinds of blocks to your content—from standard text and images to interactive components. Mix and match any blocks you want with no limits on quantity.
+
+## Inserting a new content block
+
+Insert blocks using your mouse or keyboard:
+
+**With your mouse:**
+1. Hover over the block above where you need content
+2. Click the `+` icon on the left to open the insert palette
+3. Select the block you want
+
+**With your keyboard:**
+1. On a new line, press `/` to launch the insert palette
+2. Search for the block or scroll through the list
+3. Press `Enter` to insert it
+
+## Exiting a block
+
+Some blocks capture the editing cursor to let you add content within them. For example, in a hint block, pressing `Enter` adds a new line inside the hint rather than creating a new paragraph below.
+
+To exit and continue adding content:
+- Click the `+` button to the left of your content
+- Press **⌘ + Enter** (Mac) or **Ctrl + Enter** (PC)
+
+## Selecting and managing blocks
+
+Select a single block by pressing `Esc` with the cursor in it. Select multiple blocks by highlighting content and hitting `Esc`.
+
+**Once selected, you can:**
+- Select more blocks by clicking them while holding **Shift ⇧**
+- Move selection up/down using **↑** and **↓** keys
+- Copy blocks with **⌘ + C** (Mac) or **Ctrl + C** (Windows)
+- Cut blocks with **⌘ + X** (Mac) or **Ctrl + X** (Windows)
+- Delete blocks with **⌫** or **Del**
+
+## Full-width blocks
+
+Make blocks full-width to create visual hierarchy or give more space to content that needs it.
+
+Click the **Options menu** next to a block and select **Full width**.
+
+**Available for:**
+- Code blocks
+- Images
+- Tables
+- Cards
+- Columns
+- Integration blocks
+
+<Info>
+Some blocks like OpenAPI always display full-width regardless of page width settings.
+</Info>
+
+## Content blocks
+
+### Hints
+
+Hints (or callouts) draw attention to important information like tips, warnings, and critical details.
+
+**Four hint styles:**
+- **Info** — General information, tips, and tricks
+- **Success** — Positive actions or achievements
+- **Warning** — Important information or non-critical warnings
+- **Danger** — Destructive actions or critical information
+
+Change the style in the block's **Options menu**. Customize the icon by clicking it and choosing from the icons set.
+
+<Tabs>
+  <Tab title="Examples">
+    <Info>
+      Info hints are great for showing general information or providing tips and tricks.
+    </Info>
+
+    <Note>
+      Success hints work well for positive actions or achievements.
+    </Note>
+
+    <Warning>
+      Warning hints highlight important information or non-critical warnings.
+    </Warning>
+  </Tab>
+  <Tab title="Markdown">
+    ```markdown
+    {% hint style="info" %}
+    Info hints are great for tips and tricks.
+    {% endhint %}
+
+    {% hint style="warning" %}
+    Warning hints show important information.
+    {% endhint %}
+    ```
+  </Tab>
+</Tabs>
+
+### Code blocks
+
+Add code blocks to include sample code, configurations, snippets, and usage examples.
+
+**Code block features:**
+- Set the syntax for highlighting
+- Show line numbers
+- Add captions (often filenames)
+- Wrap long lines
+- Make expandable for long code
+
+**Useful for:**
+- Configuration files
+- Code snippets
+- Command line examples
+- API endpoint calls
+
+<Tabs>
+  <Tab title="Example">
+    ```javascript index.js
+    import * as React from 'react';
+    import ReactDOM from 'react-dom';
+    import App from './App';
+
+    ReactDOM.render(<App />, window.document.getElementById('root'));
+    ```
+  </Tab>
+  <Tab title="With tabs">
+    Combine code blocks with tabs to show examples in multiple languages:
+
+    ```javascript
+    let greeting = function (name) {
+      console.log(`Hello, ${name}!`);
+    };
+    greeting("Anna");
+    ```
+
+    ```ruby
+    greeting = lambda {|name| puts "Hello, #{name}!"}
+    greeting.("Anna")
+    ```
+  </Tab>
+</Tabs>
+
+**Code block options:**
+- **Set syntax** — Enable language-specific highlighting (uses [Prism](https://prismjs.com/test.html))
+- **Line numbers** — Toggle line numbers on/off
+- **Caption** — Add a title or filename above the code
+- **Wrap code** — Wrap long lines to avoid horizontal scrolling
+- **Expandable** — Collapse code blocks longer than 10 lines
+
+### Tabs
+
+Display large blocks of related information without creating long pages. Each tab can contain multiple blocks of any type—code, images, integrations, and more.
+
+**Add or delete tabs:**
+- Hover over a tab edge and click `+` to add
+- Open the tab's **Options menu** and select **Delete** to remove
+
+**Example use case:** Platform-specific instructions
+
+<Tabs>
+  <Tab title="Windows">
+    Instructions for Windows users
+  </Tab>
+  <Tab title="macOS">
+    Instructions for macOS users
+  </Tab>
+  <Tab title="Linux">
+    Instructions for Linux users
+  </Tab>
+</Tabs>
+
+### Cards
+
+Create visually appealing layouts combining text and images in a grid. Perfect for landing pages or displaying content in a non-linear way.
+
+**Card features:**
+- Medium or large sizes
+- Cover images (light and dark mode)
+- Target links (click anywhere on card)
+- Custom content in each card
+
+<CardGroup cols={3}>
+  <Card title="Homepage" icon="house" href="https://www.gitbook.com">
+    Visit our website to learn more about GitBook
+  </Card>
+  <Card title="Developer docs" icon="code" href="https://developer.gitbook.com">
+    Build your own GitBook integration
+  </Card>
+  <Card title="Sign up" icon="user-plus" href="https://app.gitbook.com/join">
+    Get started for free
+  </Card>
+</CardGroup>
+
+**Card options:**
+- **Add target link** — Makes the entire card clickable
+- **Add cover image** — Upload images for light and dark mode
+- **Change size** — Medium (3 per row) or Large (2 per row)
+
+<Note>
+For card images, use 16:9 format (e.g., 1920x1080) for consistency across desktop and mobile.
+</Note>
+
+### Tables
+
+Organize information and document data effectively with tables.
+
+**Table features:**
+- Multiple column types (text, number, checkbox, select, users, files, rating)
+- Resizable columns
+- Full-width option
+- Convert to cards view
+
+**Column types:**
+- **Text** — Standard text with formatting
+- **Number** — Numeric values with optional decimals
+- **Checkbox** — Checkable items
+- **Select** — Single or multiple choice from custom options
+- **Users** — Team member names and avatars
+- **Files** — File references with upload support
+- **Rating** — Star ratings with configurable maximum
+
+**Table options:**
+- Add/remove columns and rows
+- Hide/show header row
+- Reset column sizing
+- Show/hide specific columns
+- Make full-width
+
+### Images
+
+Insert images into pages with options for sizing, alignment, captions, and alt text.
+
+**Upload images by:**
+- Dragging and dropping into an empty block
+- Adding an image block and using the **Select images** panel
+
+**Image features:**
+- Multiple size presets (small, medium, large, fit)
+- Alignment (left, center, right)
+- Light and dark mode variants
+- Captions and alt text
+- Image galleries (multiple images in one block)
+- Optional frames
+
+<Info>
+For accessibility, always set alt text for images. GitBook supports images up to 100MB per file.
+</Info>
+
+### Expandable
+
+Condense lengthy content, hide detailed information, or create FAQs with expandable blocks.
+
+By default, expandables are collapsed on published sites. Set them to **Expanded by default** in the block's **Options menu**.
+
+**Great for:**
+- Step-by-step guides
+- FAQ sections
+- Optional detailed information
+- Keeping pages concise
+
+<Tabs>
+  <Tab title="Example">
+    <details>
+      <summary>Click to expand</summary>
+      Expandable blocks can contain lists, code blocks, and other content types.
+    </details>
+  </Tab>
+  <Tab title="Markdown">
+    ```markdown
+    <details>
+      <summary>Add your expandable title here</summary>
+      Add your expandable body text here.
+    </details>
+    ```
+  </Tab>
+</Tabs>
+
+## Additional blocks
+
+GitBook also supports:
+
+- **Lists** — Ordered, unordered, and task lists
+- **Quotes** — Block quotes for citations or emphasis
+- **Columns** — Multi-column layouts
+- **Math & TeX** — Mathematical formulas using KaTeX
+- **Embeds** — External URL embeds
+- **Files** — File attachments and downloads
+- **Drawings** — Visual diagrams
+- **Steppers** — Sequential step-by-step guides
+
+Press `/` in any block to see all available block types and insert them into your page.

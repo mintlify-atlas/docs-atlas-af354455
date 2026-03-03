@@ -1,0 +1,218 @@
+---
+title: Member management
+description: Learn how to manage access to content for members of your organization
+icon: users
+---
+
+You can invite and remove members from your organization, manage members' content access through roles, and manage teams of members from the members' page in your organization's settings.
+
+## Members and permissions
+
+Shows each person's role, last seen date, and SSO status, if applicable. You'll also see an overview of the spaces they can access and, if you're on the Pro plan, how many teams they're part of.
+
+Click the **Teams** or **Access** listings for any member to jump to a list of all those teams and spaces.
+
+You can also click on any member to open their **individual member page**. Here, you can see more information about them, including their join date and active status.
+
+Select the **Teams** and **Spaces** tabs to see a list of the teams they're a member of, and the spaces they have access to — as well as their access level for those specific spaces.
+
+## Inviting members
+
+There are a couple of ways you can invite new members to your organization:
+
+- Generating an invite link and sharing it directly
+- Inviting them using their email address
+
+<Warning>
+  Inviting additional members, regardless of their role, to your organization, will immediately impact the price of your subscription. Take a look at our billing policy for the details.
+</Warning>
+
+### Managing invite links
+
+Invite links in GitBook allow you to maintain a list of links that members can use to sign up and quickly join your organization.
+
+Invite links are tied to specific roles – and you can create (and revoke!) as many invite links as you like.
+
+### Inviting members directly
+
+You can directly invite members in the members' section of your organization settings. Enter their email(s), select their default role, and click **continue**. Each member will receive an email that will allow them to sign up to GitBook and instantly join your organization.
+
+### Email domain
+
+You can allow all users with a specific email domain to join your organization.
+
+## Roles
+
+When adding members to your organization, you can give them a **default role**. This role will apply to any content that inherits its permissions from the organization.
+
+<Info>
+  Understanding default roles is key to getting the most out of how GitBook handles permission management. See our documentation on permissions and inheritance for a full overview of how permissions cascade throughout content in GitBook.
+</Info>
+
+Roles are how you define the level of access and control that members have over content (and the organization, in the case of admins).
+
+<Warning>
+  Regardless of role, every single member of an organization counts toward the total number of members for billing purposes.
+</Warning>
+
+Each role gets progressively higher levels of access as you move up the list:
+
+### Guest role
+
+The guest role is a very specific role in GitBook. Guests are members that have **no default organization role**. A guest acts as a standard user in every other regard, they just need to have their permissions set explicitly at a content level.
+
+Inviting a guest to the organization means that they'll only ever see content they've been directly added to. This is great if you want to add external stakeholders or contractors to your organization, but don't want to worry about giving them access to any content by default.
+
+<Note>
+  Guest members count toward the total number of members in an organization for billing purposes.
+</Note>
+
+### Reader
+
+A reader is the most basic role in GitBook: it gives read-only access.
+
+<Note>
+  Reader seats are paid for organizations on all plans.
+</Note>
+
+### Commenter
+
+Commenters have the same read-only access as readers, but they're also able to leave comments against content and spaces.
+
+<Info>
+  Commenter is one of our two advanced member roles, available only on the Pro or Enterprise plan.
+</Info>
+
+### Editor
+
+Editors are able to read and comment, just like a commenter, but they're also able to edit content in a couple of ways. Firstly, for spaces that are **open** for live edits, editors can edit the content directly. Secondly, for spaces that have live edits **locked**, editors can create and submit change requests. Editors cannot merge change requests.
+
+### Reviewer
+
+Reviewers have all the same permissions as an editor however, they can also merge their own and others' change requests.
+
+<Info>
+  Reviewer is one of our two advanced member roles, available only on the Pro or Enterprise plan.
+</Info>
+
+### Creator
+
+Creators are essentially content-level admins. They have all the same permissions as a reviewer, however they can also create and delete spaces, collections and sites, merge change requests and manage permissions at a content level.
+
+If a creator is also a creator or admin in another GitBook organization, they have the ability to move content between organizations.
+
+### Admin
+
+An admin is like a super-user for your organization — they have full access! Set someone as an admin if you're comfortable with them making changes that can impact billing, managing members, and generally just being in control of all areas of the organization.
+
+If an admin is also a creator or admin in another GitBook organization, they have the ability to move content between organizations.
+
+### The Reader role vs public docs readers
+
+The Reader role is an invited, paid seat in your organization. Public docs readers don't need an invite and don't use paid seats.
+
+**Reader role (organization member)**
+
+The Reader role is a member of your organization who:
+
+- Has been invited
+- Consumes a paid seat
+- Can access published and unpublished content they have permission for
+
+**Public docs reader (site visitor)**
+
+A public docs reader is someone who:
+
+- Is not a member of your organization
+- Doesn't need an invite
+- Doesn't consume a paid seat
+- Can only access what's published on the docs site
+
+## Teams
+
+Teams allow you to manage user access at scale. By creating a specific team, consisting of multiple members, you can grant or remove their access to spaces or collections.
+
+### Creating and managing teams
+
+You can create, edit, and remove teams in the **Teams** section of your organization settings.
+
+To find this, click on settings icon in the bottom of your window. Choose organization settings for your desired organization, then click the Teams option in the sidebar.
+
+On this page, you can view and search your current teams, or click one to open the team details page and see more information about it and its members.
+
+### Managing team members
+
+You can manage team members in two ways:
+
+1. Click on a specific member in **Members & permissions** to open their member page, and select the **Teams** tab. Click the vertical ellipsis and you can remove them from the team immediately, or choose **Manage team.**
+2. In the **Teams** section, click on the number of members in the list to open the team details page. You can then use multi-select on the member list to select and remove team members or add more with the button at the top.
+
+### Team owners
+
+Team owners (available only in Enterprise plans) allow you to hand over management of a specific team to a selected member. Team owners can add and remove members from the team they are an owner of by clicking on the organization settings, then teams. They will not have access to any other organization settings, including managing other teams.
+
+## Permissions and inheritance
+
+GitBook has a flexible permissions model that lets you have as much, or as little, control over permissions as you need. The permission model in GitBook is a **role-based, cascading** model. This means that you set defaults and then, at any level of content, decide whether to inherit those defaults or not.
+
+### Organization default roles
+
+When you add a member to your organization, you set their default role. This role applies to any piece of content that inherits its permissions from the organization defaults.
+
+### Managing inheritance
+
+Any time you create a collection or a space, you'll be able to set the type of inheritance you want. You have three broad options when setting the inheritance for a piece of content:
+
+**Inherit**
+
+Setting the inheritance to **inherit** will make the space or collection inherit the roles assigned in the **parent level content**. For top-level spaces or collections, this parent is the organization, so they would inherit the organization default roles. For spaces or sub-collections inside a collection, the parent will be the collection the content sits within.
+
+**Specific role access**
+
+Selecting a specific role when setting a collection or space's permission inheritance will **reset** the organization default roles and assign every **non-admin** to that role within the collection or space. For example, if you set the inheritance to **reader**, everyone in the organization would have read-only access to the space or collection, regardless of their default role.
+
+**No access**
+
+You can also completely revoke access for any non-admin organization members at a space or collection level. This will hide the content from everyone except for admins and whomever created the space or collection.
+
+<Note>
+  The default inheritance option for any newly-created space or collection is **inherit**. This means that whenever a piece of content is created, it'll inherit permissions from its parent by default.
+</Note>
+
+### Setting content specific permissions
+
+Once you've decided on the permission inheritance for your space or collection, you can further customise access by giving teams or members **direct access**.
+
+**Giving a team direct access**
+
+You can add a team directly to a collection or space with a specific role. This will give anyone in that team the specified access to the content.
+
+<Info>
+  Team access is a great way to ensure that the right people have access to the right content; any time someone is added to or removed from a team, they'll gain or lose, respectively, the permissions set on the content.
+</Info>
+
+**Giving a member direct access**
+
+Similarly to teams, you can also give members direct access. This is the most granular way of managing permissions. When giving single members direct access to a collection or space, you override any inherited permissions they might have. Direct member access is great if you need very specific control over collaborators.
+
+### Keeping on top of permissions
+
+While this might seem pretty complex at first, GitBook's permission model gives you control if you need it, and gets out of the way if you don't. For many teams, a **set-and-forget** approach to permission management is all they need. For other teams, especially larger organizations, this level of control over access and workflow is essential.
+
+## Removing members
+
+### Leaving an organization
+
+You can leave an organization by going to the organization's settings page and clicking on **leave organization** at the bottom of the page. Note that it will not be possible to rejoin the organization unless you are invited to it again.
+
+### Removing a member
+
+Organization admins can remove a member of a team through the members list in the members' section of the organization settings.
+
+### Transferring ownership
+
+In GitBook there isn't really a concept of ownership - as long as you or whoever you want to transfer ownership to are an admin, you should be able to perform all the same actions as the owner. If you prefer to have only one user in charge of the billing and member management, we recommend downgrading other users to the Creator role or below.
+
+#### Leaving the organization to downgrade to a free single-user plan
+
+The admin who will remain as the owner can remove other users completely, blocking their access to collaboration and editing features. You can also ensure that the right person receives bills and receipts by updating their details in organization settings billing section.

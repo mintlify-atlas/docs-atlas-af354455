@@ -1,0 +1,124 @@
+---
+title: Variables and expressions
+description: Create reusable variables that can be referenced throughout your content
+---
+
+Variables let you create reusable text that can be conditionally referenced in expressions and adaptive content conditions. Perfect for keeping repeated names, phrases, or version numbers in sync and accurate.
+
+If you repeat the same content multiple times—like product names, version numbers, or feature flags—create a variable to keep all instances synchronized. When you need to update them, change the variable once and all references update automatically.
+
+## Variable scopes
+
+Create variables scoped to:
+- **A single page** — Available only on that page
+- **A single space** — Available across all pages in the space
+
+## Create a new variable
+
+To create a variable:
+
+1. Click **Library** in your table of contents while editing a change request
+2. Click **Variables**
+3. Toggle between page-level or space-level scope
+4. Click **Create a variable**
+5. Enter a name and value
+6. Click **Add variable**
+
+<Note>
+Variable names must start with a letter and can contain letters, numbers, and underscores.
+</Note>
+
+**Example:**
+- **Name:** `latest_version`
+- **Value:** `v3.04.1`
+
+## Use variables in content
+
+Variables are referenced within expressions that you can insert inline into your content.
+
+**To insert a variable:**
+
+1. Press `/` and select **Expression** from the insert palette
+2. Double-click the expression to open the expression editor
+3. Reference your variable:
+   - Page variables: `page.vars.variable_name`
+   - Space variables: `space.vars.variable_name`
+
+The expression editor offers autocomplete to help you find the right variable.
+
+<Tabs>
+  <Tab title="Example usage">
+    Create a variable called `product_name` with value "GitBook Pro".
+    
+    Then in your content, add an expression:
+    ```
+    {{ space.vars.product_name }}
+    ```
+    
+    This will display: GitBook Pro
+  </Tab>
+  <Tab title="With conditions">
+    Variables can be used with conditional formatting:
+    ```
+    {{ space.vars.latest_version ? `Version: ${space.vars.latest_version}` : 'Version not set' }}
+    ```
+  </Tab>
+</Tabs>
+
+## Update a variable
+
+Update a variable anytime within a change request:
+
+1. Open **Library** > **Variables**
+2. Find the variable you want to update
+3. Edit its value
+4. Save your changes
+
+Updating a variable's value automatically updates it across all expression blocks that reference it. Changes go live when the change request is merged.
+
+<Info>
+Variables are especially useful for version numbers, API endpoints, product names, and any content that changes frequently across multiple pages.
+</Info>
+
+## Variables in adaptive content
+
+Variables can also be used in [conditions for adaptive content](https://docs.gitbook.com/publishing-documentation/adaptive-content/adapting-your-content#working-with-the-condition-editor), letting you show different content based on variable values.
+
+## Best practices
+
+<CardGroup cols={2}>
+  <Card title="Use descriptive names" icon="tag">
+    Name variables clearly: `api_endpoint_production` instead of `api_url`
+  </Card>
+  <Card title="Choose the right scope" icon="layer-group">
+    Use page-level for page-specific values, space-level for shared content
+  </Card>
+  <Card title="Document your variables" icon="book">
+    Keep a list of variables and their purposes for team reference
+  </Card>
+  <Card title="Update in change requests" icon="code-branch">
+    Always update variables within change requests for proper version control
+  </Card>
+</CardGroup>
+
+## Example use cases
+
+**Version numbers:**
+```
+Download version {{ space.vars.latest_version }} now.
+```
+
+**API endpoints:**
+```
+Make requests to {{ space.vars.api_base_url }}/users
+```
+
+**Feature flags:**
+```
+{{ space.vars.beta_features_enabled ? 'Beta features are available!' : 'Beta features coming soon.' }}
+```
+
+**Product names:**
+```
+Welcome to {{ space.vars.product_name }} documentation.
+```

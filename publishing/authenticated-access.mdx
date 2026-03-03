@@ -1,0 +1,72 @@
+---
+title: Authenticated access
+description: Set up custom authentication for your published content
+icon: key
+---
+
+<Note>
+  This feature is available on Ultimate site plans.
+</Note>
+
+Authenticated access allows you to publish your content while requiring authentication from any visitors who want to view it. When enabled, GitBook lets your authentication provider handle who has access to the content.
+
+## Use cases
+
+Common use cases for authenticated access include:
+
+- Publishing sensitive product documentation that should only be accessible to paying customers, sales prospects or partners
+- Publishing internal knowledge base content that should only be accessible to employees of your company
+
+## How it works
+
+There are two methods you can choose from when setting up authenticated access:
+
+1. **Installing one of our authentication integrations** — we currently support Okta, Azure, Auth0, AWS Cognito, and OIDC. We highly recommend this option if you're using an authentication provider we support.
+2. **Create and host your own server** to handle the authentication. Many different technologies can be used, but it's up to you to code and maintain the solution you choose.
+
+## Enable authenticated access
+
+<Steps>
+  <Step title="Configure audience settings">
+    Head to your site's settings, and choose **Authenticated access** from your site's audience settings. Once selected, you'll see a few options you'll need to continue configuring your site.
+    
+    You'll also see a generated "**Private key**", which you'll need at a later point in the authenticated access setup.
+  </Step>
+  
+  <Step title="Choose an authentication method">
+    Depending on your setup, we have integrations and guides on setting up authenticated access for different tools.
+  </Step>
+</Steps>
+
+## Supported authentication methods
+
+Choose the authentication method that fits your setup:
+
+<CardGroup cols={2}>
+  <Card title="Auth0" icon="lock">
+    Set up authenticated access using Auth0
+  </Card>
+  <Card title="Azure AD" icon="microsoft">
+    Set up authenticated access using Azure AD
+  </Card>
+  <Card title="Okta" icon="shield-check">
+    Set up authenticated access using Okta
+  </Card>
+  <Card title="AWS Cognito" icon="aws">
+    Set up authenticated access using AWS Cognito
+  </Card>
+  <Card title="OIDC" icon="key">
+    Set up authenticated access using OpenID Connect
+  </Card>
+  <Card title="Custom backend" icon="code">
+    Set up authenticated access with a custom backend
+  </Card>
+</CardGroup>
+
+## Integration with adaptive content
+
+<Note>
+  Authenticated access is slightly different from adaptive content, although they can work together. While authenticated access allows you to protect your docs through a login, adaptive content customizes published material based on various authentication methods.
+</Note>
+
+Authenticated access can be combined with adaptive content to deliver personalized documentation experiences based on who is viewing your content.

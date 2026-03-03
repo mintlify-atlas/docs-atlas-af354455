@@ -1,0 +1,321 @@
+---
+title: CI/CD integration
+description: Learn how to automate the update of your OpenAPI specification in GitBook with continuous integration
+---
+
+# CI/CD integration
+
+GitBook can work with any CI/CD pipeline you already have for managing your OpenAPI specification. By using the GitBook CLI, you can automate updates to your API reference.
+
+## Upload a specification file
+
+If your OpenAPI spec is generated during your CI process, you can upload it directly from your build environment:
+
+```bash
+# Set your GitBook API token as an environment variable
+export GITBOOK_TOKEN=<api-token>
+
+gitbook openapi publish \
+  --spec spec_name \
+  --organization organization_id \
+  example.openapi.yaml
+```
+
+**Parameters:**
+
+- `--spec` - The name of your specification in GitBook
+- `--organization` - Your GitBook organization ID
+- Final argument - Path to your OpenAPI spec file (YAML or JSON)
+
+<Note>
+The spec name should match an existing specification in GitBook, or a new one will be created automatically.
+</Note>
+
+## Set a new source URL or trigger a refresh
+
+If your OpenAPI specification is hosted at a URL, GitBook automatically checks for updates. To force an update (for example, after a release), run:
+
+```bash
+# Set your GitBook API token as an environment variable
+export GITBOOK_TOKEN=<api-token>
+
+gitbook openapi publish \
+  --spec spec_name \
+  --organization organization_id \
+  https://api.example.com/openapi.yaml
+```
+
+This command works the same way whether you're setting a URL for the first time or refreshing an existing URL source.
+
+## Update your spec with GitHub Actions
+
+If you're setting up a workflow to publish your OpenAPI spec, complete these steps in your repository:
+
+<Steps>
+  <Step title="Add secrets and variables">
+    In your repository, go to **Settings → Secrets and variables → Actions**.
+
+    Add a secret:
+    - `GITBOOK_TOKEN` - Your GitBook API token
+
+    Add variables (or hardcode them in the workflow):
+    - `GITBOOK_SPEC_NAME` - Your spec's name in GitBook
+    - `GITBOOK_ORGANIZATION_ID` - Your GitBook organization ID
+  </Step>
+
+  <Step title="Create the workflow file">
+    Save the workflow file as `.github/workflows/gitbook-openapi-publish.yml` in your repository.
+  </Step>
+
+  <Step title="Push changes">
+    Commit and push changes to your `main` branch (or run the workflow manually).
+  </Step>
+</Steps>
+
+### GitHub Actions workflow
+
+```yaml .github/workflows/gitbook-openapi-publish.yml
+name: Publish OpenAPI to GitBook
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      # Required secret
+      GITBOOK_TOKEN: ${{ secrets.GITBOOK_TOKEN }}
+      # Prefer repo/org variables; fallback to inline strings if you like
+      GITBOOK_SPEC_NAME: ${{ vars.GITBOOK_SPEC_NAME }}
+      GITBOOK_ORGANIZATION_ID: ${{ vars.GITBOOK_ORGANIZATION_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish spec file to GitBook
+        run: |
+          npx -y @gitbook/cli@latest openapi publish \
+            --spec "$GITBOOK_SPEC_NAME" \
+            --organization "$GITBOOK_ORGANIZATION_ID" \
+            <path_to_spec>
+```
+
+<Warning>
+Replace `<path_to_spec>` with the actual path to your OpenAPI file, such as `./openapi.yaml` or `./docs/api/openapi.json`.
+</Warning>
+
+## Advanced CI/CD patterns
+
+### Publish different specs for different branches
+
+```yaml .github/workflows/gitbook-openapi-publish.yml
+name: Publish OpenAPI to GitBook
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine spec name
+        id: spec
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "name=production-api" >> $GITHUB_OUTPUT
+          else
+            echo "name=staging-api" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish to GitBook
+        env:
+          GITBOOK_TOKEN: ${{ secrets.GITBOOK_TOKEN }}
+        run: |
+          npx -y @gitbook/cli@latest openapi publish \
+            --spec "${{ steps.spec.outputs.name }}" \
+            --organization "${{ vars.GITBOOK_ORGANIZATION_ID }}" \
+            ./openapi.yaml
+```
+
+### Generate OpenAPI spec before publishing
+
+```yaml .github/workflows/gitbook-openapi-publish.yml
+name: Generate and Publish OpenAPI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate OpenAPI spec
+        run: npm run generate-openapi
+
+      - name: Publish to GitBook
+        env:
+          GITBOOK_TOKEN: ${{ secrets.GITBOOK_TOKEN }}
+        run: |
+          npx -y @gitbook/cli@latest openapi publish \
+            --spec "${{ vars.GITBOOK_SPEC_NAME }}" \
+            --organization "${{ vars.GITBOOK_ORGANIZATION_ID }}" \
+            ./generated/openapi.yaml
+```
+
+### Validate spec before publishing
+
+```yaml .github/workflows/gitbook-openapi-publish.yml
+name: Validate and Publish OpenAPI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate OpenAPI spec
+        uses: char0n/swagger-editor-validate@v1
+        with:
+          definition-file: openapi.yaml
+
+      - name: Publish to GitBook
+        if: success()
+        env:
+          GITBOOK_TOKEN: ${{ secrets.GITBOOK_TOKEN }}
+        run: |
+          npx -y @gitbook/cli@latest openapi publish \
+            --spec "${{ vars.GITBOOK_SPEC_NAME }}" \
+            --organization "${{ vars.GITBOOK_ORGANIZATION_ID }}" \
+            ./openapi.yaml
+```
+
+## Other CI/CD platforms
+
+### GitLab CI
+
+```yaml .gitlab-ci.yml
+publish-openapi:
+  stage: deploy
+  image: node:20
+  only:
+    - main
+  script:
+    - npx -y @gitbook/cli@latest openapi publish
+        --spec "$GITBOOK_SPEC_NAME"
+        --organization "$GITBOOK_ORGANIZATION_ID"
+        ./openapi.yaml
+  variables:
+    GITBOOK_TOKEN: $GITBOOK_TOKEN
+```
+
+### CircleCI
+
+```yaml .circleci/config.yml
+version: 2.1
+
+jobs:
+  publish-openapi:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run:
+          name: Publish OpenAPI to GitBook
+          command: |
+            npx -y @gitbook/cli@latest openapi publish \
+              --spec "$GITBOOK_SPEC_NAME" \
+              --organization "$GITBOOK_ORGANIZATION_ID" \
+              ./openapi.yaml
+
+workflows:
+  publish:
+    jobs:
+      - publish-openapi:
+          filters:
+            branches:
+              only: main
+```
+
+### Jenkins
+
+```groovy Jenkinsfile
+pipeline {
+    agent any
+    
+    environment {
+        GITBOOK_TOKEN = credentials('gitbook-token')
+        GITBOOK_SPEC_NAME = 'my-api'
+        GITBOOK_ORGANIZATION_ID = 'org_abc123'
+    }
+    
+    stages {
+        stage('Publish OpenAPI') {
+            steps {
+                sh '''
+                    npx -y @gitbook/cli@latest openapi publish \
+                        --spec "$GITBOOK_SPEC_NAME" \
+                        --organization "$GITBOOK_ORGANIZATION_ID" \
+                        ./openapi.yaml
+                '''
+            }
+        }
+    }
+}
+```
+
+## Best practices
+
+<Steps>
+  <Step title="Validate before publishing">
+    Always validate your OpenAPI spec before publishing to catch errors early in your CI pipeline.
+  </Step>
+
+  <Step title="Use environment-specific specs">
+    Maintain separate specifications for production, staging, and development environments.
+  </Step>
+
+  <Step title="Secure your API token">
+    Never commit your GitBook API token to version control. Always use CI/CD secrets or environment variables.
+  </Step>
+
+  <Step title="Trigger on spec changes">
+    Configure your CI to run only when OpenAPI files change to avoid unnecessary builds.
+  </Step>
+
+  <Step title="Add notifications">
+    Set up notifications (Slack, email, etc.) to alert your team when API documentation is updated.
+  </Step>
+</Steps>
+
+<Note>
+For more information on obtaining a GitBook API token, visit your GitBook organization settings under **Integrations → API tokens**.
+</Note>

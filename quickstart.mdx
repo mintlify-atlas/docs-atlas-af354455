@@ -1,80 +1,202 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: Quickstart
+description: Get up and running in GitBook and publish your first docs site in minutes
 ---
 
-## Get started in three steps
+# Quickstart
 
-Get your documentation site running locally and make your first customization.
+This quickstart guide explains how to get set up in GitBook and publish your first docs site in minutes.
 
-### Step 1: Set up your local environment
+At the end of this guide, you'll have a live documentation site, ready to expand and customize.
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+<Steps>
+  <Step title="Getting started">
+    You'll need to [create an account](https://app.gitbook.com/join) before you can get started with your first documentation site.
 
-### Step 2: Deploy your changes
+    After creating your account, you'll automatically see a new docs site that's ready for you to edit and customize. Choose how you want to add content to your site before you publish from the on-screen options.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+    <Tip>
+    Your content isn't published yet — so you can edit, customize and preview your docs site before making it live. Hit **Publish** to make it live immediately.
+    </Tip>
+  </Step>
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+  <Step title="Edit your content">
+    There are two ways to edit and update your content in GitBook — in our visual editor, or following a docs-as-code workflow. **You can choose one, or use a combination of both**.
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+    Whichever workflow you prefer, you'll edit your content using a **branch-based editing flow**. Find out more on [the Concepts page](/concepts).
 
-### Step 3: Go live
+    ### Use the visual editor
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+    GitBook's what-you-see-is-what-you-get (WYSIWYG) editor lets you edit content visually, drag content blocks to reorganize them and see how your content will look as you work.
+
+    This visual editing workflow is ideal for users who don't want to work in a code editor, or who have experience working with tools like Notion or Google Docs.
+
+    **1. Edit your docs in a change request**
+
+    First, find your docs site in the sidebar and click the item below it. This takes you to the space where your content lives.
+
+    Click **Edit** in the top-right. This opens a change request where you can edit the content of the space.
+
+    Click **Add new…** in the table of contents on the left-hand side to add a page, and give it a title.
+
+    **2. Preview your changes**
+
+    Along the top of the web app you'll see tabs for **Editor**, **Changes** and **Preview**. These switch between different views for your content.
+
+    Click **Preview** to see a live preview of what your docs site will look like with all the changes in your change request, on both desktop and mobile.
+
+    **3. Merge your changes**
+
+    Once you're happy with your changes, click the **Merge** button in the top-right corner.
+
+    This will update the primary version of your content with all the edits from the change request. If the content is part of a live docs site, the site will be updated immediately.
+
+    ### Code-based editing
+
+    Sync your documentation with a GitHub or GitLab repository to enable code-based editing. Once synced, you can edit your docs in your existing developer environment.
+
+    This workflow is ideal for technical users who don't want to switch tools and prefer to manage their documentation alongside other code.
+
+    **1. Set up Git Sync**
+
+    If you haven't already set up Git Sync when creating your site, first find your docs site in the sidebar and click the name of the content below it. This takes you to the space where your content lives.
+
+    Click the **Set up Git Sync** button in the top-right and follow the instructions to sync your space to your chosen Git repository.
+
+    **2. Edit your docs from your developer environment**
+
+    Once you've synced your space to your Git repository, you can update the content of your docs from that repository in your development environment.
+
+    Open the repository, create a pull request and make the changes you want.
+
+    <Info>
+    GitBook supports Markdown editing, so you can create and format content using common syntax. Every standard block in GitBook can be written and formatted using Markdown syntax.
+    </Info>
+
+    **3. Preview your changes**
+
+    You can preview your changes on your published docs site from the pull request in GitHub or GitLab.
+
+    In your pull request, you'll see a status with a unique preview URL. Click **Details** on that status to open the preview URL and see how your site will look when the pull request is merged and your site is updated.
+
+    **4. Merge your changes**
+
+    You're good to go. Merge your pull request and your content will be updated both in the GitBook app and on your docs site, if it's live.
+
+    In the GitBook app, every commit and your merged pull request will be synced to your space as updates in the version history.
+  </Step>
+
+  <Step title="Customize your docs">
+    ### Organize your site navigation
+
+    You can add more content to your site — such as an API reference, a help center or a changelog — at any time. When you add content, you can organize your site's navigation bar to help users easily find what they're looking for.
+
+    Head to [the Concepts page](/concepts) to find out more about site navigation.
+
+    ### Customize the look and feel of your docs site
+
+    Your docs site will look great out of the box, but you can also customize many settings that change the look and feel of your published site.
+
+    You can customize your site's logo, colors and font, add to your site navigation bar using site sections and variants, update your site's visibility settings and much more.
+  </Step>
+
+  <Step title="Publish your documentation">
+    ### Publish your docs
+
+    You can publish your site with a click at any time.
+
+    Open your site's dashboard by clicking the site's name in the sidebar. Then click **Publish** in the top-right corner to make it live.
+
+    Once your site is live, the dashboard will update with a link to the live site.
+
+    ### Add a custom domain
+
+    By default, your site will be published with a unique URL with this format:
+
+    ```
+    https://[organization-name].gitbook.io/[site-title]
+    ```
+
+    While this may be suitable for some teams, many choose to change their URL to a custom domain or a custom subdirectory.
+
+    To do this, open your site dashboard by clicking the site's name in the sidebar, then open the **Settings** tab and choose **Domain and URL**.
+
+    Use the buttons on the screen to choose the option you want, and follow the instructions to configure the DNS settings with your domain provider.
+
+    <Note>
+    It can take up to 48 hours for your DNS changes to take effect — although they typically propagate much faster.
+    </Note>
+  </Step>
+</Steps>
 
 ## Next steps
 
-Now that you have your docs running, explore these key features:
-
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card
+    title="Invite your team to collaborate"
+    icon="users"
+    href="/collaboration/inviting-team"
+  >
+    Add team members to your organization and set permissions
+  </Card>
+  <Card
+    title="Change site visibility"
+    icon="eye"
+    href="/publishing/site-settings"
+  >
+    Control who can see your content with share links and authenticated access
+  </Card>
+  <Card
+    title="Add auto-translations"
+    icon="language"
+    href="/gitbook-agent/translations"
+  >
+    Create multilingual documentation with one-click translations
+  </Card>
+  <Card
+    title="Explore integrations"
+    icon="puzzle-piece"
+    href="/integrations/overview"
+  >
+    Connect GitBook with your favorite tools and services
+  </Card>
 </CardGroup>
 
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What is GitBook?">
+    GitBook is a collaborative, AI-native documentation platform where teams can create, review, and publish branded docs as websites. Docs sites hosted on GitBook can offer a built-in AI Assistant and connect to other AI tools via MCP.
+
+    You can edit content using the advanced visual editor using Markdown, sync your docs with a Git repository for a docs as code workflow — or use a combination of the two. However your team chooses to use GitBook, you'll use a Git-like branching workflow with a full version history, which protects your primary content while encouraging collaboration and feedback across your entire team.
+  </Accordion>
+
+  <Accordion title="How do you publish documentation with GitBook?">
+    Publishing in GitBook is a simple process once your content is ready to go live:
+
+    1. Create a new docs site (or open an existing one) and choose the content you want to publish.
+    2. Choose your site audience. You can publish to everyone with the **public** setting, or limit the audience with **share links** or **authenticated access**.
+    3. (Optional) Customize the branding, domain, and theme using the built-in options.
+    4. Click **Publish**. Congrats — your docs are live! You can add more spaces later as site sections or variants.
+  </Accordion>
+
+  <Accordion title="Is GitBook open source?">
+    GitBook itself is not open source. However, GitBook's published docs platform — which is used to host and display documentation on a docs site — is open source. You can visit the repository to see the code and submit changes for review.
+
+    While GitBook itself isn't open source, **open source projects can publish documentation on GitBook for free**. Teams can sign up for the Community plan and publish content using a Sponsored site plan, both of which are free to qualifying teams.
+  </Accordion>
+
+  <Accordion title="What's the difference between a site and a space in GitBook?">
+    In GitBook, a **docs site** is your overall documentation hub, hosting all content accessible to your audience and featuring customizable options like theme and domain.
+
+    Each site contains one or more **spaces**, which serve as individual sections within the site, organizing related content for better modularity and ease of management. Spaces let you focus your collaboration on specific topics, and you can combine multiple spaces on a single site to build structure or enable options like translations (for localized documentation) or multi-product support.
+  </Accordion>
+
+  <Accordion title="What are the differences between GitBook's visual editor and Git Sync?">
+    GitBook offers two main methods for editing documentation — the visual editor and Git Sync. The **visual editor** is an advanced, block-based editor that allows you to create and modify content directly within GitBook using a traditional user interface that includes Markdown support. It's ideal for those who prefer a more intuitive, hands-on editing experience without directly dealing with code.
+
+    **Git Sync** integrates your documentation workflow with a Git repository, enabling a 'docs as code' approach. This option is ideal for developers and teams who prefer managing documentation alongside their codebase, using familiar Git commands and workflows.
+
+    Your team can choose one of these workflows, or use a combination of them both. And whichever method they prefer, editing follows a consistent, Git-like branching workflow with a full version history and content review process. This doesn't just promote collaboration and quality across your docs — it also safeguards primary content from accidental edits.
+  </Accordion>
+</AccordionGroup>
