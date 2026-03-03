@@ -71,6 +71,7 @@
             "group": "Collaboration",
             "pages": [
               "collaboration/inviting-team",
+              "collaboration/live-edits",
               "collaboration/change-requests",
               "collaboration/merge-rules",
               "collaboration/comments",
@@ -87,8 +88,11 @@
               "publishing/custom-domain",
               "publishing/authenticated-access",
               "publishing/adaptive-content",
+              "publishing/site-redirects",
               "publishing/ai-search",
               "publishing/gitbook-assistant",
+              "publishing/llm-ready-docs",
+              "publishing/mcp-servers",
               "publishing/embedding",
               "publishing/site-settings",
               "publishing/insights"
