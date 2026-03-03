@@ -1,0 +1,178 @@
+{
+  "projectType": "saas",
+  "projectName": "GitBook",
+  "projectDescription": "AI-native documentation platform for creating, collaborating on, and publishing beautiful product documentation.",
+  "theme": "mint",
+  "primaryColor": "#3b82f6",
+  "lightColor": "#60a5fa",
+  "darkColor": "#2563eb",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "concepts",
+              "import"
+            ]
+          },
+          {
+            "group": "Git Sync",
+            "pages": [
+              "git-sync/overview",
+              "git-sync/enabling-github-sync",
+              "git-sync/enabling-gitlab-sync",
+              "git-sync/content-configuration",
+              "git-sync/github-pull-request-preview",
+              "git-sync/commits",
+              "git-sync/monorepos",
+              "git-sync/troubleshooting"
+            ]
+          },
+          {
+            "group": "Create Content",
+            "pages": [
+              "creating-content/formatting",
+              "creating-content/content-structure",
+              "creating-content/blocks",
+              "creating-content/variables-and-expressions",
+              "creating-content/reusable-content",
+              "creating-content/version-control",
+              "creating-content/broken-links"
+            ]
+          },
+          {
+            "group": "GitBook Agent",
+            "pages": [
+              "gitbook-agent/overview",
+              "gitbook-agent/automatic-documentation-suggestions",
+              "gitbook-agent/write-and-edit",
+              "gitbook-agent/review-change-requests",
+              "gitbook-agent/translations"
+            ]
+          },
+          {
+            "group": "Collaboration",
+            "pages": [
+              "collaboration/inviting-team",
+              "collaboration/change-requests",
+              "collaboration/merge-rules",
+              "collaboration/comments",
+              "collaboration/notifications",
+              "collaboration/pdf-export"
+            ]
+          },
+          {
+            "group": "Publishing",
+            "pages": [
+              "publishing/publish-docs-site",
+              "publishing/site-structure",
+              "publishing/customization",
+              "publishing/custom-domain",
+              "publishing/authenticated-access",
+              "publishing/adaptive-content",
+              "publishing/ai-search",
+              "publishing/gitbook-assistant",
+              "publishing/embedding",
+              "publishing/site-settings",
+              "publishing/insights"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/overview",
+              "integrations/slack",
+              "integrations/visual-studio-code"
+            ]
+          },
+          {
+            "group": "Account Management",
+            "pages": [
+              "account-management/plans",
+              "account-management/personal-settings",
+              "account-management/organization-settings",
+              "account-management/member-management",
+              "account-management/sso-and-saml"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "OpenAPI",
+            "pages": [
+              "api-reference/openapi/overview",
+              "api-reference/openapi/add-specification",
+              "api-reference/openapi/insert-in-docs"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "api-reference/guides/structuring-api-reference",
+              "api-reference/guides/custom-code-samples",
+              "api-reference/guides/managing-operations",
+              "api-reference/guides/test-it-button",
+              "api-reference/guides/describing-enums",
+              "api-reference/guides/ci-cd-integration"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "api-reference/extensions-reference"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Resources",
+        "groups": [
+          {
+            "group": "Help",
+            "pages": [
+              "resources/gitbook-ui",
+              "resources/keyboard-shortcuts",
+              "resources/glossary"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Visual block-based editor with WYSIWYG interface",
+    "Git Sync for docs-as-code workflows with GitHub and GitLab",
+    "GitBook Agent - AI-powered documentation assistant",
+    "Change requests and branching workflow",
+    "Site publishing with customization and custom domains",
+    "Authenticated access and share links",
+    "Adaptive content based on user attributes",
+    "OpenAPI documentation support",
+    "Translations and multi-language variants",
+    "Team collaboration with roles and permissions",
+    "AI Search and GitBook Assistant",
+    "Embedding documentation in products"
+  ],
+  "publicApiSurface": [
+    "Visual Editor - Block-based WYSIWYG content editor",
+    "Git Sync - Bi-directional GitHub/GitLab synchronization",
+    "Change Requests - Git-like branching and merging workflow",
+    "GitBook Agent - AI writing, translation, and review assistant",
+    "Publishing API - Site publication and management",
+    "OpenAPI Integration - API documentation blocks",
+    "Customization API - Theme, colors, fonts, and branding",
+    "Authenticated Access - SSO/SAML integration",
+    "Adaptive Content - Conditional content display",
+    "Embedding API - JavaScript SDK for in-product docs",
+    "MCP Servers - Model Context Protocol for AI tools",
+    "Integrations - Slack, VS Code, and third-party tools"
+  ]
+}
